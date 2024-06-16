@@ -19,7 +19,7 @@ const useRefresh: Mutation<refreshRequest, refreshResponse> = (args) => {
     mutationFn: async(data: refreshRequest) => {
       return await refreshAPI(data)
     },
-    ...(onSuccessFn && {onSuccess: (res: loginResponse) => onSuccessFn(res)}),
+    ...(onSuccessFn && {onSuccess: (res: refreshResponse) => onSuccessFn(res)}),
     ...(onErrorFn && {onError: (res) => onErrorFn(res)})
   })
 }
