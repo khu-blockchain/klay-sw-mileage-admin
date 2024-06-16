@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {Global} from "@emotion/react";
+import Caver from "caver-js";
+import {BrowserRouter} from "react-router-dom";
+import {GlobalStyle} from "@/styles/_reset";
+import RootRouter from "@/RootRouter";
+const queryClient = new QueryClient();
+
+export const provider = window.klaytn;
+export const caver = new Caver(provider)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Global styles={GlobalStyle}/>
+        <RootRouter/>
+      </BrowserRouter>
+      <ReactQueryDevtools/>
+    </QueryClientProvider>
+  )
 }
 
-export default App;
+export default App
