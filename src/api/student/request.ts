@@ -10,6 +10,7 @@ type signUp = {
     walletAddress: string;
     bankAccountNumber: string;
     bankCode: string;
+    personalInformationConsentStatus: number
   }
 }
 

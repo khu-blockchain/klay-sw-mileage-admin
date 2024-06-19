@@ -2,11 +2,10 @@ import {API} from "@/api";
 import {AuthServer, updateAuthorization} from "@/api/serverInstance";
 import {loginRequest, refreshRequest} from "@/api/auth/request";
 import {loginResponse, refreshResponse} from "@/api/auth/response";
-import {makeQuery} from "@/api/utils";
 
 const login: API<loginRequest, loginResponse> = async(request) => {
   try{
-    const result = await AuthServer.post(`/login${makeQuery(request.query)}`, request.body)
+    const result = await AuthServer.post(`/login`, request.body)
     const {data}: {data: loginResponse} = result
     updateAuthorization(data.tokens[0].token)
     return data;

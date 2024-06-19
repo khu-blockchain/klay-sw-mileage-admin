@@ -1,8 +1,6 @@
 type login = {
-  query: {
-    loginType: 'STUDENT'
-  };
   body: {
+    loginType: 'STUDENT';
     id: string;
     password: string;
   }

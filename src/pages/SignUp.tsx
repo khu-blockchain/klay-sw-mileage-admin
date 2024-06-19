@@ -2,17 +2,17 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import InitLayout from "@/components/layout/InitLayout";
 import InitContentBox from "@/components/InitContentBox";
 import useSignUpStore from "@/store/local/useSignUpStore";
-import {Flex, FormControl, FormLabel, VStack, Text, HStack, Select, useToast} from "@chakra-ui/react";
+import {Flex, FormControl, FormLabel, VStack, Text, HStack, Select, useToast, Checkbox} from "@chakra-ui/react";
 import BasicInput from "@/components/atom/BasicInput";
 import BasicButton from "@/components/atom/BasicButton";
 import useIsAble from "@/hooks/useAble";
 import KaiKasConnectButton from "@/components/atom/KaiKasConnecButtont";
-import {caver} from "@/App";
 import {bankCode} from "@/assets/constants/bankCode.data";
 import BasicSelect from "@/components/atom/BasicSelect";
 import {useSignUp} from '@/api/student/quries';
 import md5 from "md5";
 import {useNavigate} from "react-router-dom";
+import useProviderStore from "@/store/global/useProviderStore";
 
 const SignUp = () => {
   const [step, setStep] = useState<number>(0)
@@ -39,8 +39,6 @@ export default SignUp;
 const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   const {state, setState} = useSignUpStore((state) => state)
 
-
-  console.log(state)
   const canNext = useIsAble([
     state.studentId !== '',
     state.password !== '',
@@ -133,14 +131,19 @@ const Step1 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
 
 const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   const {state, setState} = useSignUpStore((state) => state)
+  const {caver} = useProviderStore((state) => state)
   const navigate = useNavigate();
   const toast = useToast();
+  const [isTermChecked, setIsTermChecked] = useState(false)
+
+  console.log(caver)
 
   const canSignUp = useIsAble([
     state.walletAddress !== '',
     caver.utils.isAddress(state.walletAddress),
     state.bankAccountNumber !== '',
     state.bankCode !== '',
+    isTermChecked
   ])
 
   const {mutate, isPending} = useSignUp({
@@ -163,6 +166,7 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   })
 
   const onSignUp = async () => {
+    console.log(3333)
     await mutate({
       body: {
         studentId        : state.studentId,
@@ -175,6 +179,7 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
         walletAddress    : state.walletAddress,
         bankAccountNumber: state.bankAccountNumber,
         bankCode         : state.bankCode,
+        personalInformationConsentStatus: isTermChecked ? 1 : 0
       }
     })
   }
@@ -214,11 +219,15 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
         </HStack>
 
       </FormControl>
+      <Flex align={'flex-start'} w={'100%'}>
+
+        <Checkbox isChecked={isTermChecked} onChange={(e) => setIsTermChecked(e.target.checked)}>개인정보 제공에 동의합니다.</Checkbox>
+      </Flex>
       <Flex w={'100%'} justify={'space-between'}>
         <BasicButton onClick={() => setStep(prev => prev - 1)} size={'md'}>
           이전
         </BasicButton>
-        <BasicButton onClick={() => onSignUp} isLoading={isPending} isDisabled={!canSignUp} size={'md'}>
+        <BasicButton onClick={() => onSignUp()} isLoading={isPending} isDisabled={!canSignUp} size={'md'}>
           회원가입
         </BasicButton>
       </Flex>

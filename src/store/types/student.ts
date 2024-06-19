@@ -22,9 +22,9 @@ type Student = {
   email: string;
   phone_number: string;
   department: string;
-  wallet_address: Nullable<string>;
-  bank_account_number: Nullable<string>;
-  bank_code: Nullable<string>;
+  wallet_address: string
+  bank_account_number: string;
+  bank_code: string;
 }
 
 type StudentWithToken = {

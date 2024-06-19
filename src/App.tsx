@@ -5,12 +5,22 @@ import Caver from "caver-js";
 import {BrowserRouter} from "react-router-dom";
 import {GlobalStyle} from "@/styles/_reset";
 import RootRouter from "@/RootRouter";
+import {useEffect} from "react";
+import useProviderStore from "@/store/global/useProviderStore";
 const queryClient = new QueryClient();
 
-export const provider = window.klaytn;
-export const caver = new Caver(provider)
-
 function App() {
+  const {setProvider, setCaver} = useProviderStore((state) => state)
+
+  useEffect(() => {
+    const provider = window?.klaytn;
+    if(provider){
+      setProvider(provider)
+      const caver = new Caver(provider);
+      setCaver(caver)
+    }
+  }, [])
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

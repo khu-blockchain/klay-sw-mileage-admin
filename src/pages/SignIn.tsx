@@ -15,7 +15,6 @@ import {setLocalStorageData} from "@/utils/webStorage.utils";
 const SignIn = () => {
   const navigate = useNavigate()
   const toast = useToast();
-
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -46,8 +45,7 @@ const SignIn = () => {
 
   const onSignIn = async () => {
     await mutate({
-      query: {loginType: 'STUDENT'},
-      body : {id, password: md5(password)}
+      body : {loginType: 'STUDENT',id, password: md5(password)}
     })
   }
 

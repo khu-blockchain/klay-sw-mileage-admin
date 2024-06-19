@@ -16,6 +16,9 @@ export const GlobalStyle = css`
     line-height: 1.3 !important;
     --main-color: #a40f16;
     --kaikas-color: #3366FF;
+    --side-bar-color: #363740;
+    --bg-color: #F7F8FC;
+    --border-color: #DFE0EB;
   }
 
   html,
@@ -166,6 +169,11 @@ export const GlobalStyle = css`
     user-select: auto;
   }
 
+  input[type='checkbox'] {
+    border: 1px solid var(--chakra-colors-gray-600) !important;
+    outline: 1px solid var(--chakra-colors-gray-600) !important;
+  }
+  
   input:focus {
     outline: none;
   }
