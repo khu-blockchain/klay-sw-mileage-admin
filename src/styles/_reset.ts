@@ -19,6 +19,8 @@ export const GlobalStyle = css`
     --side-bar-color: #363740;
     --bg-color: #F7F8FC;
     --border-color: #DFE0EB;
+    
+    --default-transition: all ease-in-out 0.15s
   }
 
   html,
@@ -201,7 +203,7 @@ export const GlobalStyle = css`
   //}
 
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
     height: 4px;
   }
   &::-webkit-scrollbar-thumb {

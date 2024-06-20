@@ -1,7 +1,7 @@
-import {API} from "@/api";
-import {AuthServer, updateAuthorization} from "@/api/serverInstance";
-import {loginRequest, refreshRequest} from "@/api/auth/request";
-import {loginResponse, refreshResponse} from "@/api/auth/response";
+import {API} from "@/feature";
+import {AuthServer, updateAuthorization} from "@/feature/serverInstance";
+import {loginRequest, refreshRequest} from "@/feature/types/auth.request";
+import {loginResponse, refreshResponse} from "@/feature/types/auth.response";
 
 const login: API<loginRequest, loginResponse> = async(request) => {
   try{

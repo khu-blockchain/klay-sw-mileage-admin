@@ -1,6 +1,6 @@
 import {Nullable, SwMileageToken} from "@/store/types";
 import {create} from "zustand";
-import  {KIP7} from "caver-js";
+import Caver, {KIP7} from "caver-js";
 
 interface SwMileageTokenState {
   swMileageToken: Nullable<SwMileageToken>
@@ -11,7 +11,7 @@ interface SwMileageTokenState {
 
 const useSwMileageTokenStore = create<SwMileageTokenState>((set) => ({
   swMileageToken: null,
-  kip7: null,
+  kip7: new Caver().kct.kip7.create(),
   setSwMileageToken: (swMileageToken: SwMileageToken) => set({swMileageToken}),
   setKip7: (kip7: KIP7) => set({kip7}),
 }))

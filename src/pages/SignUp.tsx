@@ -2,17 +2,17 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import InitLayout from "@/components/layout/InitLayout";
 import InitContentBox from "@/components/InitContentBox";
 import useSignUpStore from "@/store/local/useSignUpStore";
-import {Flex, FormControl, FormLabel, VStack, Text, HStack, Select, useToast, Checkbox} from "@chakra-ui/react";
-import BasicInput from "@/components/atom/BasicInput";
+import {Flex, FormControl, FormLabel, VStack, Text, HStack, useToast, Checkbox, Input} from "@chakra-ui/react";
 import BasicButton from "@/components/atom/BasicButton";
 import useIsAble from "@/hooks/useAble";
 import KaiKasConnectButton from "@/components/atom/KaiKasConnecButtont";
 import {bankCode} from "@/assets/constants/bankCode.data";
 import BasicSelect from "@/components/atom/BasicSelect";
-import {useSignUp} from '@/api/student/quries';
 import md5 from "md5";
 import {useNavigate} from "react-router-dom";
-import useProviderStore from "@/store/global/useProviderStore";
+import {caver} from "@/App";
+import {useSignUp} from "@/feature/queries/student.queries";
+import BasicInput from "@/components/atom/BasicInput";
 
 const SignUp = () => {
   const [step, setStep] = useState<number>(0)
@@ -131,12 +131,9 @@ const Step1 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
 
 const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   const {state, setState} = useSignUpStore((state) => state)
-  const {caver} = useProviderStore((state) => state)
   const navigate = useNavigate();
   const toast = useToast();
   const [isTermChecked, setIsTermChecked] = useState(false)
-
-  console.log(caver)
 
   const canSignUp = useIsAble([
     state.walletAddress !== '',

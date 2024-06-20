@@ -1,8 +1,8 @@
 import {useMutation} from "@tanstack/react-query";
-import {loginRequest, refreshRequest} from "@/api/auth/request";
-import {loginAPI, refreshAPI} from "@/api/auth/api";
-import {Mutation} from "@/api";
-import {loginResponse, refreshResponse} from "@/api/auth/response";
+import {loginRequest, refreshRequest} from "@/feature/types/auth.request";
+import {loginAPI, refreshAPI} from "@/feature/api/auth.api";
+import {Mutation} from "@/feature";
+import {loginResponse, refreshResponse} from "@/feature/types/auth.response";
 
 const useLogin: Mutation<loginRequest, loginResponse> = (args) => {
   const {onSuccessFn, onErrorFn} = args

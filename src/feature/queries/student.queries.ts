@@ -1,8 +1,8 @@
 import {useMutation} from "@tanstack/react-query";
-import {signUpRequest} from "@/api/student/request";
-import {signUpAPI} from "@/api/student/api";
-import {Mutation} from "@/api";
-import {signUpResponse} from "@/api/student/response";
+import {signUpRequest} from "@/feature/types/student.request";
+import {signUpAPI} from "@/feature/api/student.api";
+import {Mutation} from "@/feature";
+import {signUpResponse} from "@/feature/types/student.response";
 
 const useSignUp: Mutation<signUpRequest, signUpResponse> = (args) => {
   const {onSuccessFn, onErrorFn} = args

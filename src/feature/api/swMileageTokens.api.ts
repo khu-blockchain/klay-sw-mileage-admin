@@ -1,7 +1,7 @@
-import {SwMileageTokenServer} from "@/api/serverInstance";
-import {API} from "@/api";
-import {approveSwMileageTokenRequest, getSwMileageTokenListRequest} from "@/api/sw_mileage_tokens/request";
-import {approveSwMileageTokenResponse, getSwMileageTokenListResponse} from "@/api/sw_mileage_tokens/response";
+import {SwMileageTokenServer} from "@/feature/serverInstance";
+import {API} from "@/feature";
+import {approveSwMileageTokenRequest, getSwMileageTokenListRequest} from "@/feature/types/swMileageTokens.request";
+import {approveSwMileageTokenResponse, getSwMileageTokenListResponse} from "@/feature/types/swMileageTokens.response";
 
 const getSwMileageTokenList: API<getSwMileageTokenListRequest, getSwMileageTokenListResponse> = async() => {
   try{

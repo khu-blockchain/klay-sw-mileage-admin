@@ -4,17 +4,17 @@ import SignIn from "@/pages/SignIn";
 import SignUp from "@/pages/SignUp";
 import {useEffect, useState} from "react";
 import {getLocalStorageData, removeLocalStorageData, setLocalStorageData} from "@/utils/webStorage.utils";
-import {useRefresh} from "@/api/auth/quries";
 import {getToday} from "@/utils/dayjs.utils";
 import {TokenType} from "@/store/types";
 import useStudentStore from "@/store/global/useStudentStore";
 import LoadingBox from "@/components/LoadingBox";
 import MainLayout from "@/components/layout/MainLayout";
 import RegisterMileage from "@/pages/RegisterMileage";
-
-const adminPK = '0x614c600e5499ebc302a6c93a421ca03d5ddf7365c7a3017bb69feabaa3abd5e5'
-const adminaddress = '0x791F375676F47A8D599832646b4E7A67eC844348'
-const ca = '0x8913f9091A5f3e782a4349735110699e4Fb213d9'
+import SwMileageInfo from "@/pages/SwMileageInfo";
+import RegisteredMileageList from "@/pages/RegisteredMileageList";
+import {useRefresh} from "@/feature/queries/auth.queries";
+import {useGetActivityField} from "@/feature/queries/activityField.queries";
+import {useGetSwMileageTokenList} from "@/feature/queries/swMileageTokens.queries";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ const RootRouter = () => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(true)
 
-  const {mutate, isPending} = useRefresh({
+  const {mutate} = useRefresh({
     onSuccessFn: (data) => {
       const {tokens} = data;
       const refreshToken = tokens[TokenType.REFRESH]
@@ -30,7 +30,6 @@ const RootRouter = () => {
       setLocalStorageData('refresh-expires', refreshToken.expires);
       setStudent(data);
       setIsLoading(false)
-      navigate('/')
     },
     onErrorFn  : (error: any) => {
       toast({
@@ -72,7 +71,7 @@ const RootRouter = () => {
     hasAccess()
   }, [])
 
-  if(isPending) {
+  if(isLoading) {
     return <LoadingBox height={'100%'}/>
   }
 
@@ -84,7 +83,10 @@ const RootRouter = () => {
       </Route>
       <Route element={<Auth/>}>
         <Route element={<MainLayout/>}>
-          <Route index element={<RegisterMileage/>}/>
+          <Route index path={'/'} element={<SwMileageInfo/>}/>
+          <Route path={'/register'} element={<RegisterMileage/>}/>
+          <Route path={'/list'} element={<RegisteredMileageList/>}/>
+          <Route path={'/profile'} element={<RegisterMileage/>}/>
 
         </Route>
       </Route>
@@ -106,7 +108,9 @@ const Init = () => {
 
 const Auth = () => {
   const {student} = useStudentStore((state) => state)
-  if(!student) {
+  useGetActivityField({});
+  useGetSwMileageTokenList({})
+  if(student.student.student_id === '') {
     return <Navigate to={'/sign-in'}/>
   }
   return <Outlet/>

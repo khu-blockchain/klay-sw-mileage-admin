@@ -1,7 +1,7 @@
-import {AcademicFieldServer} from "@/api/serverInstance";
-import {API} from "@/api";
-import {getActivityFieldListRequest} from "@/api/activity_field/request";
-import {getActivityFieldListResponse} from "@/api/activity_field/response";
+import {AcademicFieldServer} from "@/feature/serverInstance";
+import {API} from "@/feature";
+import {getActivityFieldListRequest} from "@/feature/types/activityField.request";
+import {getActivityFieldListResponse} from "@/feature/types/activityField.response";
 
 const getActivityFieldList: API<getActivityFieldListRequest, getActivityFieldListResponse> = async() => {
   try{

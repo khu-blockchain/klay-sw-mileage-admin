@@ -1,7 +1,7 @@
-import {StudentServer} from "@/api/serverInstance";
-import {API} from "@/api";
-import {getStudentInfoByIdRequest, signUpRequest, updateStudentInfoRequest} from "@/api/student/request";
-import {getStudentInfoByIdResponse, signUpResponse, updateStudentInfoResponse} from "@/api/student/response";
+import {StudentServer} from "@/feature/serverInstance";
+import {API} from "@/feature";
+import {getStudentInfoByIdRequest, signUpRequest, updateStudentInfoRequest} from "@/feature/types/student.request";
+import {getStudentInfoByIdResponse, signUpResponse, updateStudentInfoResponse} from "@/feature/types/student.response";
 
 const signUp: API<signUpRequest, signUpResponse> = async(request) => {
   try{

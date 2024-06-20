@@ -36,10 +36,6 @@ const initialUserState: StudentWithToken = {
   tokens: initialTokenState
 }
 
-
-
-
-
 const useStudentStore = create<UserState>((set, get) => ({
   student: initialUserState,
   setStudent: (student) => set({student}),

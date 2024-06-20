@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import InitLayout from "@/components/layout/InitLayout";
 import InitContentBox from "@/components/InitContentBox";
-import {Button, Flex, FormControl, FormLabel, useToast, VStack} from "@chakra-ui/react";
-import BasicInput from "@/components/atom/BasicInput";
+import {Button, Flex, FormControl, FormLabel, Input, useToast, VStack} from "@chakra-ui/react";
 import useIsAble from "@/hooks/useAble";
 import {useNavigate} from "react-router-dom";
-import {useLogin} from '@/api/auth/quries';
 import md5 from 'md5';
 import BasicButton from "@/components/atom/BasicButton";
 import useStudentStore from "@/store/global/useStudentStore";
 import {TokenType} from "@/store/types";
 import {setLocalStorageData} from "@/utils/webStorage.utils";
+import {useLogin} from "@/feature/queries/auth.queries";
+import BasicInput from "@/components/atom/BasicInput";
 
 const SignIn = () => {
   const navigate = useNavigate()

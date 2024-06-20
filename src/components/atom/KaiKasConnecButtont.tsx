@@ -1,9 +1,8 @@
 import React from 'react';
 import {Button, ButtonProps, Image} from "@chakra-ui/react";
 import KaikasIcon from '@/assets/img/icon_kaikas.png'
-import useProviderStore from "@/store/global/useProviderStore";
+import {provider} from "@/App";
 const KaiKasConnectButton = (props: ButtonProps & {setAddress: (value: string) => void}) => {
-  const {provider} = useProviderStore((state) => state)
   const {setAddress, ...buttonProps} = props;
 
   const connectKaikas = async() => {
