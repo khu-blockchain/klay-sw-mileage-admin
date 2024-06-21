@@ -6,7 +6,7 @@ import {Flex, FormControl, FormLabel, VStack, Text, HStack, useToast, Checkbox, 
 import BasicButton from "@/components/atom/BasicButton";
 import useIsAble from "@/hooks/useAble";
 import KaiKasConnectButton from "@/components/atom/KaiKasConnecButtont";
-import {bankCode} from "@/assets/constants/bankCode.data";
+import {BANK_CODE} from "@/assets/constants/bankCode.data";
 import BasicSelect from "@/components/atom/BasicSelect";
 import md5 from "md5";
 import {useNavigate} from "react-router-dom";
@@ -205,8 +205,8 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
         </Text>
         <HStack w={'100%'} spacing={'10px'}>
           <BasicSelect w={'140px'} placeholder='은행 선택' onChange={(e) => setState('bankCode', e.target.value)}>
-            {Object.keys(bankCode).map((el: string) => (
-              <option value={el}>{bankCode[el]}</option>
+            {Object.keys(BANK_CODE).map((el: string) => (
+              <option value={el}>{BANK_CODE[el]}</option>
             ))}
           </BasicSelect>
           <BasicInput flex={1} value={state.bankAccountNumber}

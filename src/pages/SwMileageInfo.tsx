@@ -32,7 +32,7 @@ export default SwMileageInfo;
 
 const ScholarshipTable = () => {
   return (
-    <Table>
+    <Table variant={'info'}>
       <Thead>
         <Tr>
           <Th>구분</Th>
@@ -79,7 +79,7 @@ const ScholarshipTable = () => {
 
 const MileageScoreTable = () => {
   return (
-    <Table>
+    <Table variant={'info'}>
       <Thead>
         <Tr>
           <Th>분야</Th>

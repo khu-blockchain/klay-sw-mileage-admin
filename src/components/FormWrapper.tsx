@@ -10,7 +10,7 @@ const FormWrapper = (
   }: {title: string, description?: string, children: ReactNode}) => {
 
   return (
-    <LVStack w={'100%'} spacing={'20px'} p={'32px'}>
+    <LVStack w={'100%'} spacing={'30px'} p={'32px'}>
       <LVStack>
         <Text fontSize={'20px'} fontWeight={600}>{title}</Text>
         {description && <Text whiteSpace={'pre-wrap'} color={'var(--chakra-colors-gray-500)'} fontSize={'14px'}

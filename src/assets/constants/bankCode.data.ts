@@ -1,4 +1,4 @@
-const bankCode: Record<string, string> = {
+const BANK_CODE: Record<string, string> = {
   "001": "한국은행",
   "002": "산업은행",
   "003": "기업은행",
@@ -92,5 +92,5 @@ const bankCode: Record<string, string> = {
 }
 
 export {
-  bankCode
+  BANK_CODE
 }

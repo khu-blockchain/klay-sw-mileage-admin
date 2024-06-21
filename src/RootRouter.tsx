@@ -15,6 +15,8 @@ import RegisteredMileageList from "@/pages/RegisteredMileageList";
 import {useRefresh} from "@/feature/queries/auth.queries";
 import {useGetActivityField} from "@/feature/queries/activityField.queries";
 import {useGetSwMileageTokenList} from "@/feature/queries/swMileageTokens.queries";
+import RegisteredMileageDetail from "@/pages/RegisteredMileageDetail";
+import Profile from "@/pages/Profile";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -85,8 +87,11 @@ const RootRouter = () => {
         <Route element={<MainLayout/>}>
           <Route index path={'/'} element={<SwMileageInfo/>}/>
           <Route path={'/register'} element={<RegisterMileage/>}/>
-          <Route path={'/list'} element={<RegisteredMileageList/>}/>
-          <Route path={'/profile'} element={<RegisterMileage/>}/>
+          <Route path={'/list/*'}>
+            <Route index element={<RegisteredMileageList/>}/>
+            <Route path={'detail'} element={<RegisteredMileageDetail/>}/>
+          </Route>
+          <Route path={'/profile'} element={<Profile/>}/>
 
         </Route>
       </Route>

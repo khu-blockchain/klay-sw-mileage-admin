@@ -22,7 +22,6 @@ const useGetSwMileageTokenList: Query<getSwMileageTokenListRequest, getSwMileage
       setSwMileageToken(activateToken)
       setKip7(caver.kct.kip7.create(activateToken.contract_address))
       return result
-
     },
     enabled: getStudent().student_id !== ''
   })

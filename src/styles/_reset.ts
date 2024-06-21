@@ -211,4 +211,55 @@ export const GlobalStyle = css`
     background-color: var(--chakra-colors-blackAlpha-300);
   }
 
+  //pagination
+  
+  .pagination-table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .pagination-nav{
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 7px;
+    width: fit-content;
+    list-style-type: unset;
+    border: 2px solid var(--gray-100);
+    background-color: var(--white-900);
+    padding: 8px 10px;
+    border-radius: 6px;
+    user-select: none;
+  }
+
+  .pagination-item {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+
+  .pagination-item:hover {
+    cursor: pointer;
+    background-color: var(--gray-100);
+    transition: background-color 0.1s linear;
+  }
+
+  .pagination-item-active {
+    color: white;
+    background-color: var(--chakra-colors-facebook-400);
+    pointer-events: none;
+    transition: background-color 0.1s linear;
+  }
+
+
 `

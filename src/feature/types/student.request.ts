@@ -15,11 +15,11 @@ type signUp = {
 }
 
 type getStudentInfoById = {
-  params: {studentId: number}
+  params: {studentId: string}
 }
 
 type updateStudentInfo = {
-  params: {studentId: number};
+  params: {studentId: string};
   body: {
     walletAddress: string;
     bankAccountNumber: string;

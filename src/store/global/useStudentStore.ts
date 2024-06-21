@@ -4,6 +4,7 @@ import {JWT, Student, StudentWithToken} from "@/store/types";
 interface UserState {
   student: StudentWithToken;
   setStudent: (student: StudentWithToken) => void;
+  setStudentInfo: (studentInfo: Student) => void;
   getStudent: () => Student
   getTokens: () => JWT
 }
@@ -39,6 +40,12 @@ const initialUserState: StudentWithToken = {
 const useStudentStore = create<UserState>((set, get) => ({
   student: initialUserState,
   setStudent: (student) => set({student}),
+  setStudentInfo: (studentInfo) => set({
+    student: {
+      student: studentInfo,
+      tokens: get().student.tokens
+    }
+  }),
   getStudent: () => get().student.student,
   getTokens: () => get().student.tokens
 }))

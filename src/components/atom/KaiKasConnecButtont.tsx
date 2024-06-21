@@ -16,8 +16,8 @@ const KaiKasConnectButton = (props: ButtonProps & {setAddress: (value: string) =
   }
 
   return (
-    <Button onClick={() => connectKaikas()} borderRadius={'15px'} minW={'280px'} h={'44px'} w={'100%'} color={'#ffffff'} colorScheme={'messenger'} bgColor={'var(--kaikas-color)'} {...buttonProps}>
-      <Image src={KaikasIcon} w={'16px'} mr={'7px'} objectFit={'cover'}/>
+    <Button onClick={() => connectKaikas()} fontSize={'14px'} borderRadius={'15px'} minW={'280px'} h={'44px'} w={'100%'} color={'#ffffff'} colorScheme={'messenger'} bgColor={'var(--kaikas-color)'} {...buttonProps}>
+      <Image src={KaikasIcon} w={'14px'} mr={'7px'} objectFit={'cover'}/>
       Connect to Kaikas
     </Button>
   );
