@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import InitLayout from "@/components/layout/InitLayout";
 import InitContentBox from "@/components/InitContentBox";
 import {
-  Button,
   FormControl,
-  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -16,7 +14,7 @@ import useIsAble from "@/hooks/useAble";
 import {useNavigate} from "react-router-dom";
 import md5 from 'md5';
 import BasicLargeButton from "@/components/atom/BasicLargeButton";
-import useStudentStore from "@/store/global/useStudentStore";
+import useAdminStore from "@/store/global/useAdminStore";
 import {TokenType} from "@/store/types";
 import {setLocalStorageData} from "@/utils/webStorage.utils";
 import {useLogin} from "@/feature/queries/auth.queries";
@@ -28,7 +26,7 @@ const SignIn = () => {
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const {setStudent} = useStudentStore((state) => state)
+  const {setAdmin} = useAdminStore((state) => state)
 
   const canLogin = useIsAble([
     id !== '',
@@ -39,9 +37,9 @@ const SignIn = () => {
     onSuccessFn: (data) => {
       const {tokens} = data;
       const refreshToken = tokens[TokenType.REFRESH]
-      setLocalStorageData('refresh-token', refreshToken.token);
-      setLocalStorageData('refresh-expires', refreshToken.expires);
-      setStudent(data);
+      setLocalStorageData('admin-refresh-token', refreshToken.token);
+      setLocalStorageData('admin-refresh-expires', refreshToken.expires);
+      setAdmin(data);
       navigate('/')
     },
     onErrorFn  : (error: any) => toast({
@@ -54,7 +52,8 @@ const SignIn = () => {
 
   const onSignIn = async () => {
     await mutate({
-      body: {loginType: 'STUDENT', id, password: md5(password)}
+      body: {loginType: 'ADMIN', id, password: md5(password)}
+
     })
   }
 
@@ -62,7 +61,7 @@ const SignIn = () => {
     <InitLayout>
       <InitContentBox
         title={'로그인'}
-        description={<Text color={'var(--chakra-colors-gray-500)'}>SW 마일리지 신청 페이지입니다.</Text>}>
+        description={<Text color={'var(--chakra-colors-gray-500)'}>SW 마일리지 관리자 페이지입니다.</Text>}>
         <VStack align={'center'} w={'100%'} spacing={'20px'}>
           <FormControl>
             <InputGroup>
@@ -73,7 +72,7 @@ const SignIn = () => {
                      pl={'48px'}
                      value={id}
                      onChange={(e) => setId(e.target.value)}
-                     placeholder={'학번을 입력해주세요.'}
+                     placeholder={'아이디를 입력해주세요.'}
                      type={'text'}/>
             </InputGroup>
           </FormControl>
@@ -93,13 +92,6 @@ const SignIn = () => {
           <BasicLargeButton isLoading={isPending} onClick={() => onSignIn()} isDisabled={!canLogin} w={'100%'}>
             로그인
           </BasicLargeButton>
-          <HStack w={'100%'} align={'flex-start'} spacing={'6px'}>
-            <Text color={'var(--chakra-colors-gray-500)'} fontSize={'14px'}>계정이 없으신가요?</Text>
-            <Button color={'var(--main-color)'} onClick={() => navigate('/sign-up')} fontWeight={400} variant={'link'}
-                    fontSize={'14px'}>
-              회원가입
-            </Button>
-          </HStack>
         </VStack>
       </InitContentBox>
     </InitLayout>

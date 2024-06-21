@@ -1,6 +1,6 @@
 type login = {
   body: {
-    loginType: 'STUDENT';
+    loginType: 'ADMIN';
     id: string;
     password: string;
   }

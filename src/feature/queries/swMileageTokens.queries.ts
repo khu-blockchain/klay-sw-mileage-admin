@@ -1,14 +1,14 @@
-import {useMutation, useQuery} from "@tanstack/react-query";
-import {Mutation, Query} from "@/feature";
-import {approveSwMileageTokenRequest, getSwMileageTokenListRequest} from "@/feature/types/swMileageTokens.request";
-import {approveSwMileageTokenResponse, getSwMileageTokenListResponse} from "@/feature/types/swMileageTokens.response";
-import {approveSwMileageTokenAPI, getSwMileageTokenListAPI} from "@/feature/api/swMileageTokens.api";
-import useStudentStore from "@/store/global/useStudentStore";
+import {useQuery} from "@tanstack/react-query";
+import {Query} from "@/feature";
+import {getSwMileageTokenListRequest} from "@/feature/types/swMileageTokens.request";
+import {getSwMileageTokenListResponse} from "@/feature/types/swMileageTokens.response";
+import {getSwMileageTokenListAPI} from "@/feature/api/swMileageTokens.api";
+import useAdminStore from "@/store/global/useAdminStore";
 import {caver} from "@/App";
 import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
 
 const useGetSwMileageTokenList: Query<getSwMileageTokenListRequest, getSwMileageTokenListResponse> = (args) => {
-  const  {getStudent} = useStudentStore(state => state)
+  const  {getAdmin} = useAdminStore(state => state)
   const {setKip7, setSwMileageToken} = useSwMileageTokenStore(state => state)
 
   return useQuery({
@@ -23,23 +23,10 @@ const useGetSwMileageTokenList: Query<getSwMileageTokenListRequest, getSwMileage
       setKip7(caver.kct.kip7.create(activateToken.contract_address))
       return result
     },
-    enabled: getStudent().student_id !== ''
+    enabled: getAdmin().admin_id !== -1
   })
 }
-
-const useApproval: Mutation<approveSwMileageTokenRequest, approveSwMileageTokenResponse> = (args) => {
-  const {onSuccessFn, onErrorFn} = args
-  return useMutation({
-    mutationFn: async(data) => {
-      return await approveSwMileageTokenAPI(data)
-    },
-    ...(onSuccessFn && {onSuccess: (res: approveSwMileageTokenResponse) => onSuccessFn(res)}),
-    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
-  })
-}
-
 
 export {
   useGetSwMileageTokenList,
-  useApproval
 }

@@ -1,13 +1,7 @@
-import {SwMileage, SwMileageFile} from "@/store/types";
-
-type registerSwMileage = {
-  swMileage: SwMileage,
-  swMileageFiles: Array<SwMileageFile>
-}
+import {SwMileage} from "@/store/types";
 
 type getSwMileageList = Array<SwMileage>
 
 export type {
-  registerSwMileage as registerSwMileageResponse,
   getSwMileageList as getSwMileageListResponse,
 }

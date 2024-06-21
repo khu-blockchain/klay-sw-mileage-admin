@@ -1,4 +1,3 @@
-import {Nullable} from "@/store/types/common";
 
 type JWT = [AccessToken, RefreshToken]
 
@@ -16,19 +15,16 @@ type Token = {
   token_type: number; // enum
 }
 
-type Student = {
-  student_id: string;
+type Admin = {
+  admin_id: number;
+  id: string;
   name: string;
-  email: string;
-  phone_number: string;
-  department: string;
-  wallet_address: string
-  bank_account_number: string;
-  bank_code: string;
+  wallet_address: string;
+  role: number
 }
 
-type StudentWithToken = {
-  student: Student,
+type AdminWithToken = {
+  admin: Admin,
   tokens: JWT
 }
 
@@ -36,8 +32,8 @@ export type {
   JWT,
   AccessToken,
   RefreshToken,
-  Student,
-  StudentWithToken
+  Admin,
+  AdminWithToken
 }
 
 export {

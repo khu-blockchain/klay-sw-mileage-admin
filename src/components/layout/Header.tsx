@@ -20,8 +20,8 @@ const Header = () => {
   }, [location])
 
   const logout = () => {
-    removeLocalStorageData('refresh-token');
-    removeLocalStorageData('refresh-expires');
+    removeLocalStorageData('admin-refresh-token');
+    removeLocalStorageData('admin-refresh-expires');
     window.location.reload();
   }
 

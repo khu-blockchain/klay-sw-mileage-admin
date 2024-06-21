@@ -1,8 +1,8 @@
-import {StudentWithToken} from "@/store/types";
+import {AdminWithToken} from "@/store/types";
 
-type login = StudentWithToken
+type login = AdminWithToken
 
-type refresh = StudentWithToken
+type refresh = AdminWithToken
 
 export type {
   login as loginResponse,

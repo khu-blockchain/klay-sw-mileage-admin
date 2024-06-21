@@ -1,18 +1,8 @@
 import {SwMileageServer} from "@/feature/serverInstance";
 import {API} from "@/feature";
-import {getSwMileageListRequest, registerSwMileageRequest} from "../types/swMileage.request";
-import {getSwMileageListResponse, registerSwMileageResponse} from "@/feature/types/swMileage.response";
+import {getSwMileageListRequest} from "../types/swMileage.request";
+import {getSwMileageListResponse} from "@/feature/types/swMileage.response";
 import {makeQuery} from "@/feature/utils";
-
-
-const registerSwMileage: API<registerSwMileageRequest, registerSwMileageResponse> = async(request) => {
-  try{
-    const result = await SwMileageServer.post(``, request.body)
-    return result.data;
-  }catch (e) {
-    throw e
-  }
-}
 
 const getSwMileageList: API<getSwMileageListRequest, getSwMileageListResponse> = async(request) => {
   try{
@@ -25,6 +15,5 @@ const getSwMileageList: API<getSwMileageListRequest, getSwMileageListResponse> =
 
 
 export {
-  registerSwMileage as registerSwMileageAPI,
   getSwMileageList as getSwMileageListAPI,
 }
