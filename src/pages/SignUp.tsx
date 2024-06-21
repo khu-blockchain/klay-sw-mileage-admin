@@ -2,17 +2,26 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import InitLayout from "@/components/layout/InitLayout";
 import InitContentBox from "@/components/InitContentBox";
 import useSignUpStore from "@/store/local/useSignUpStore";
-import {Flex, FormControl, FormLabel, VStack, Text, HStack, useToast, Checkbox, Input} from "@chakra-ui/react";
-import BasicButton from "@/components/atom/BasicButton";
+import {
+  Flex,
+  FormControl,
+  VStack,
+  Text,
+  HStack,
+  useToast,
+  Checkbox,
+  Input,
+  Button,
+  Select, UnorderedList, ListItem, Divider
+} from "@chakra-ui/react";
 import useIsAble from "@/hooks/useAble";
 import KaiKasConnectButton from "@/components/atom/KaiKasConnecButtont";
 import {BANK_CODE} from "@/assets/constants/bankCode.data";
-import BasicSelect from "@/components/atom/BasicSelect";
 import md5 from "md5";
 import {useNavigate} from "react-router-dom";
 import {caver} from "@/App";
 import {useSignUp} from "@/feature/queries/student.queries";
-import BasicInput from "@/components/atom/BasicInput";
+import LVStack from "@/components/atom/LVStack";
 
 const SignUp = () => {
   const [step, setStep] = useState<number>(0)
@@ -24,7 +33,9 @@ const SignUp = () => {
 
   return (
     <InitLayout>
-      <InitContentBox title={'회원가입'} description={`회원가입 진행 전, Klay 계정을 소유하지 않은 학생은\n크롬 웹스토어를 통해 Kaikas를 설치해주세요.`}>
+      <InitContentBox
+        title={'회원가입'}
+        description={<SignUpDescription/>}>
         {step === 0 && <Step0 setStep={setStep}/>}
         {step === 1 && <Step1 setStep={setStep}/>}
         {step === 2 && <Step2 setStep={setStep}/>}
@@ -34,6 +45,20 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+const SignUpDescription = () => {
+  return (
+    <LVStack spacing={'6px'}>
+      <Text whiteSpace={'pre-wrap'} color={'var(--chakra-colors-gray-500)'} fontSize={'14px'}
+            fontWeight={400}>
+        {'회원가입 진행 전, Klay 계정을 소유하지 않은 학생은 크롬 웹스토어를 통해\nKaikas를 설치해주세요.'}
+      </Text>
+      <Button size={'sm'}
+              onClick={() => window.open('https://chromewebstore.google.com/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi')}
+              color={'#3366FF'} variant={'link'}>Kaikas 다운로드</Button>
+    </LVStack>
+  )
+}
 
 
 const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
@@ -48,30 +73,32 @@ const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   return (
     <VStack align={'center'} w={'100%'} spacing={'24px'}>
       <FormControl>
-        <FormLabel>아이디(학번)</FormLabel>
-        <BasicInput value={state.studentId}
-                    onChange={(e) => setState('studentId', e.target.value)}
-                    placeholder={'학번을 입력해주세요.'}
-                    type={'text'}/>
+        <Input variant={'basic'}
+               value={state.studentId}
+               onChange={(e) => setState('studentId', e.target.value)}
+               placeholder={'학번을 입력해주세요.'}
+               type={'text'}/>
       </FormControl>
       <FormControl>
-        <FormLabel>비밀번호</FormLabel>
-        <BasicInput value={state.password}
-                    onChange={(e) => setState('password', e.target.value)}
-                    placeholder={'비밀번호를 입력해주세요.'}
-                    type={'password'}/>
+        <Input variant={'basic'}
+               value={state.password}
+               onChange={(e) => setState('password', e.target.value)}
+               placeholder={'비밀번호를 입력해주세요.'}
+               type={'password'}/>
       </FormControl>
       <FormControl>
-        <FormLabel>비밀번호 확인</FormLabel>
-        <BasicInput value={state.confirmPassword}
-                    onChange={(e) => setState('confirmPassword', e.target.value)}
-                    placeholder={'동일한 비밀번호를 입력해주세요.'}
-                    type={'password'}/>
+        <Input variant={'basic'}
+               value={state.confirmPassword}
+               onChange={(e) => setState('confirmPassword', e.target.value)}
+               placeholder={'동일한 비밀번호를 입력해주세요.'}
+               type={'password'}/>
       </FormControl>
+      <Divider borderColor={'var(--chakra-colors-gray-300)'}/>
       <Flex w={'100%'} justify={'flex-end'}>
-        <BasicButton isDisabled={!canNext} onClick={() => setStep(prev => prev + 1)} size={'md'}>
+        <Button color={'var(--main-color)'} variant={'link'} isDisabled={!canNext}
+                onClick={() => setStep(prev => prev + 1)}>
           다음
-        </BasicButton>
+        </Button>
       </Flex>
     </VStack>
   )
@@ -90,40 +117,43 @@ const Step1 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   return (
     <VStack align={'center'} w={'100%'} spacing={'24px'}>
       <FormControl>
-        <FormLabel>이름</FormLabel>
-        <BasicInput value={state.name}
-                    onChange={(e) => setState('name', e.target.value)}
-                    placeholder={'이름을 입력해주세요.'}
-                    type={'text'}/>
+        <Input variant={'basic'}
+               value={state.name}
+               onChange={(e) => setState('name', e.target.value)}
+               placeholder={'이름을 입력해주세요.'}
+               type={'text'}/>
       </FormControl>
       <FormControl>
-        <FormLabel>이메일</FormLabel>
-        <BasicInput value={state.email}
-                    onChange={(e) => setState('email', e.target.value)}
-                    placeholder={'이메일을 입력해주세요.'}
-                    type={'text'}/>
+        <Input variant={'basic'}
+               value={state.email}
+               onChange={(e) => setState('email', e.target.value)}
+               placeholder={'이메일을 입력해주세요.'}
+               type={'text'}/>
       </FormControl>
       <FormControl>
-        <FormLabel>전화번호</FormLabel>
-        <BasicInput value={state.phoneNumber}
-                    onChange={(e) => setState('phoneNumber', e.target.value)}
-                    placeholder={'010-000-0000'}
-                    type={'text'}/>
+        <Input variant={'basic'}
+               value={state.phoneNumber}
+               onChange={(e) => setState('phoneNumber', e.target.value)}
+               placeholder={'010-000-0000'}
+               type={'text'}/>
       </FormControl>
       <FormControl>
-        <FormLabel>학과</FormLabel>
-        <BasicInput value={state.department}
-                    onChange={(e) => setState('department', e.target.value)}
-                    placeholder={'학과를 입력해주세요.'}
-                    type={'text'}/>
+        <Input variant={'basic'}
+               value={state.department}
+               onChange={(e) => setState('department', e.target.value)}
+               placeholder={'학과를 입력해주세요.'}
+               type={'text'}/>
       </FormControl>
+      <Divider borderColor={'var(--chakra-colors-gray-300)'}/>
       <Flex w={'100%'} justify={'space-between'}>
-        <BasicButton onClick={() => setStep(prev => prev - 1)} size={'md'}>
+        <Button color={'var(--main-color)'} variant={'link'}
+                onClick={() => setStep(prev => prev - 1)}>
           이전
-        </BasicButton>
-        <BasicButton isDisabled={!canNext} onClick={() => setStep(prev => prev + 1)} size={'md'}>
+        </Button>
+        <Button isDisabled={!canNext} color={'var(--main-color)'} variant={'link'}
+                onClick={() => setStep(prev => prev + 1)}>
           다음
-        </BasicButton>
+        </Button>
       </Flex>
     </VStack>
   )
@@ -166,16 +196,16 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
     console.log(3333)
     await mutate({
       body: {
-        studentId        : state.studentId,
-        password         : md5(state.password),
-        passwordConfirm  : md5(state.confirmPassword),
-        name             : state.name,
-        email            : state.email,
-        phoneNumber      : state.phoneNumber,
-        department       : state.department,
-        walletAddress    : state.walletAddress,
-        bankAccountNumber: state.bankAccountNumber,
-        bankCode         : state.bankCode,
+        studentId                       : state.studentId,
+        password                        : md5(state.password),
+        passwordConfirm                 : md5(state.confirmPassword),
+        name                            : state.name,
+        email                           : state.email,
+        phoneNumber                     : state.phoneNumber,
+        department                      : state.department,
+        walletAddress                   : state.walletAddress,
+        bankAccountNumber               : state.bankAccountNumber,
+        bankCode                        : state.bankCode,
         personalInformationConsentStatus: isTermChecked ? 1 : 0
       }
     })
@@ -184,49 +214,48 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   return (
     <VStack align={'center'} w={'100%'} spacing={'24px'}>
       <FormControl>
-        <FormLabel>지갑 주소</FormLabel>
-        <Text mb={'10px'} color={'var(--chakra-colors-gray-500)'} fontSize={'12px'} fontWeight={400}>
-          {'지갑 연결 버튼을 눌러 Kaikas를 연결하거나, 본인의 지갑주소를 입력해 주세요.\n' +
-            'Kaikas가 열리지 않는다면 Kaikas 아이콘을 클릭하여 주소를 복사해주세요.'}
-        </Text>
-        <VStack w={'100%'} spacing={'10px'}>
-          <BasicInput value={state.walletAddress}
-                      onChange={(e) => setState('walletAddress', e.target.value)}
-                      placeholder={'0x로 시작하는 주소를 입력하세요.'}
-                      type={'text'}/>
-          <KaiKasConnectButton setAddress={(value: string) => setState('walletAddress', value)}/>
-        </VStack>
-
-      </FormControl>
-      <FormControl>
-        <FormLabel>은행 및 계좌번호</FormLabel>
-        <Text mb={'10px'} color={'var(--chakra-colors-gray-500)'} fontSize={'12px'} fontWeight={400}>
-          은행과 계좌번호를 입력해주세요.(계좌번호 입력시 - 제외)
-        </Text>
         <HStack w={'100%'} spacing={'10px'}>
-          <BasicSelect w={'140px'} placeholder='은행 선택' onChange={(e) => setState('bankCode', e.target.value)}>
+          <Select h={'56px'} w={'200px'} borderRadius={'12px'} borderColor={'var(--chakra-colors-gray-300)'} placeholder='은행 선택' onChange={(e) => setState('bankCode', e.target.value)}>
             {Object.keys(BANK_CODE).map((el: string) => (
               <option value={el}>{BANK_CODE[el]}</option>
             ))}
-          </BasicSelect>
-          <BasicInput flex={1} value={state.bankAccountNumber}
-                      onChange={(e) => setState('bankAccountNumber', e.target.value)}
-                      placeholder={'계좌번호를 입력하세요.'}
-                      type={'text'}/>
+          </Select>
+          <Input variant={'basic'}
+                 flex={1} value={state.bankAccountNumber}
+                 onChange={(e) => setState('bankAccountNumber', e.target.value)}
+                 placeholder={'계좌번호를 입력하세요.'}
+                 type={'text'}/>
         </HStack>
 
       </FormControl>
+      <Divider borderColor={'var(--chakra-colors-gray-300)'}/>
+      <FormControl>
+        <LVStack w={'100%'} spacing={'10px'}>
+          <Input variant={'basic'}
+                 value={state.walletAddress}
+                 onChange={(e) => setState('walletAddress', e.target.value)}
+                 placeholder={'0x로 시작하는 주소를 입력하세요.'}
+                 type={'text'}/>
+          <UnorderedList spacing={'6px'} color={'var(--chakra-colors-gray-500)'} fontSize={'12px'} fontWeight={400}>
+            <ListItem>지갑 연결 버튼을 눌러 Kaikas를 연결하거나, 본인의 지갑주소를 입력해 주세요.</ListItem>
+            <ListItem>Kaikas가 열리지 않는다면 Kaikas 아이콘을 클릭하여 주소를 복사해주세요.</ListItem>
+          </UnorderedList>
+          <KaiKasConnectButton setAddress={(value: string) => setState('walletAddress', value)}/>
+        </LVStack>
+      </FormControl>
       <Flex align={'flex-start'} w={'100%'}>
-
-        <Checkbox isChecked={isTermChecked} onChange={(e) => setIsTermChecked(e.target.checked)}>개인정보 제공에 동의합니다.</Checkbox>
+        <Checkbox isChecked={isTermChecked} onChange={(e) => setIsTermChecked(e.target.checked)}>개인정보 제공에
+          동의합니다.</Checkbox>
       </Flex>
+      <Divider borderColor={'var(--chakra-colors-gray-300)'}/>
       <Flex w={'100%'} justify={'space-between'}>
-        <BasicButton onClick={() => setStep(prev => prev - 1)} size={'md'}>
+        <Button color={'var(--main-color)'} variant={'link'}
+                onClick={() => setStep(prev => prev - 1)}>
           이전
-        </BasicButton>
-        <BasicButton onClick={() => onSignUp()} isLoading={isPending} isDisabled={!canSignUp} size={'md'}>
+        </Button>
+        <Button color={'var(--main-color)'} variant={'link'} onClick={() => onSignUp()} isLoading={isPending} isDisabled={!canSignUp} size={'md'}>
           회원가입
-        </BasicButton>
+        </Button>
       </Flex>
     </VStack>
   )

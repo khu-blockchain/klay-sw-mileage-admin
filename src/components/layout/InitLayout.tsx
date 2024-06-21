@@ -1,19 +1,20 @@
 import React, {ReactNode} from 'react';
-import {Box, Flex, Image} from "@chakra-ui/react";
-
+import {Flex, Image} from "@chakra-ui/react";
+import InitBackground from '@/assets/img/img_sign_in.png';
 const InitLayout = ({children}: {children: ReactNode}) => {
   return (
     <Flex w={'100%'} h={'100%'}>
-      <Flex bgColor={'#ffffff'} w={'100%'} zIndex={10} position={'fixed'} h={'80px'} padding={'0 20px'} align={'center'} borderBottom={'1px solid var(--chakra-colors-gray-300)'}>
-        <Image src={'https://swedu.khu.ac.kr/images/logo_swedu.png'} h={'42px'} objectFit={'cover'}/>
+      <Flex flex={1}>
+        <Image src={InitBackground} width={'100%'} objectFit={'cover'} objectPosition={'center'}/>
       </Flex>
-      <Flex justify={'center'}
-            w={'100%'}
-            pt={'calc(80px + 150px)'}
-            h={'100%'}
-            bgColor={'var(--chakra-colors-gray-100)'}
+      <Flex
+        minW={'720px'}
+        w={'40%'}
+        h={'100%'}
+        justify={'center'}
+        align={'center'}
       >
-        {children}
+      {children}
       </Flex>
     </Flex>
   );

@@ -10,6 +10,11 @@ const baseStyle = definePartsStyle({
     borderColor: 'var(--chakra-colors-gray-300)',
     padding: 2,
     borderRadius: 4, // change the border radius of the control
+    _checked: {
+      borderColor: 'var(--kaikas-color)',
+      backgroundColor: 'var(--kaikas-color)',
+      color: '#ffffff'
+    }
   },
 })
 
