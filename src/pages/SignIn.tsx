@@ -68,7 +68,7 @@ const SignIn = () => {
               <InputLeftElement w={'56px'} h={'56px'} pointerEvents='none'>
                 <UserRound width={'20px'} color={'var(--chakra-colors-gray-400)'}/>
               </InputLeftElement>
-              <Input variant={'basic'}
+              <Input variant={'init'}
                      pl={'48px'}
                      value={id}
                      onChange={(e) => setId(e.target.value)}
@@ -81,7 +81,7 @@ const SignIn = () => {
               <InputLeftElement w={'56px'} h={'56px'} pointerEvents='none'>
                 <LockKeyhole width={'20px'} color={'var(--chakra-colors-gray-400)'}/>
               </InputLeftElement>
-              <Input variant={'basic'}
+              <Input variant={'init'}
                      pl={'48px'}
                      value={password}
                      onChange={(e) => setPassword(e.target.value)}

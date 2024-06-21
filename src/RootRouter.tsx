@@ -80,13 +80,20 @@ const RootRouter = () => {
       <Route element={<Auth/>}>
         <Route element={<MainLayout/>}>
           <Route index path={'/'} element={<SwMileageInfo/>}/>
-          {/*<Route path={'/register'} element={<RegisterMileage/>}/>*/}
-          {/*<Route path={'/list/*'}>*/}
-          {/*  <Route index element={<RegisteredMileageList/>}/>*/}
-          {/*  <Route path={'detail'} element={<RegisteredMileageDetail/>}/>*/}
-          {/*</Route>*/}
-          {/*<Route path={'/profile'} element={<Profile/>}/>*/}
-
+          <Route path={'token/*'}>
+            <Route path={'create'} element={<SwMileageInfo/>}/>
+            <Route path={'activate'} element={<SwMileageInfo/>}/>
+            <Route path={'history'} element={<SwMileageInfo/>}/>
+          </Route>
+          <Route path={'list'} element={<SwMileageInfo/>}/>
+          <Route path={'mint/*'}>
+            <Route path={'execute'} element={<SwMileageInfo/>}/>
+            <Route path={'history'} element={<SwMileageInfo/>}/>
+          </Route>
+          <Route path={'burn/*'}>
+            <Route path={'execute'} element={<SwMileageInfo/>}/>
+            <Route path={'history'} element={<SwMileageInfo/>}/>
+          </Route>
         </Route>
       </Route>
 

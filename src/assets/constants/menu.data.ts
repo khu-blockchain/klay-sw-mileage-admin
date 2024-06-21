@@ -1,52 +1,93 @@
-import {Info, List, LucideIcon, PencilLine, UserCog, SquareArrowOutUpRight} from "lucide-react";
+import {Info,Coins,List, HandCoins,Flame, LucideIcon} from 'lucide-react';
 
-type MenuItem = {
-  label: string
-  type: 'route' | 'link',
-  path: string
-  icon: LucideIcon
-}
+export type Menu = {
+  // id는 1부터 시작하여 증가
+  id: number;
+  name: string;
+  root: string;
+  icon: LucideIcon;
+  subMenu: Array<SubMenu>;
+};
 
-const MENUS: Array<MenuItem> = [
+export type SubMenu = {
+  // id는 Menu의 id + 0 + 1부터 시작하여 증가하는 숫자
+  id: number;
+  name: string;
+  root: string;
+};
+
+export const MENU: Array<Menu> = [
   {
-    label: 'SW 마일리지',
-    type: 'route',
-    path: '',
-    icon : Info
+    id: 1,
+    name: "SW 마일리지",
+    root: "",
+    icon: Info,
+    subMenu:[],
   },
   {
-    type: 'route',
-    label: 'SW 마일리지 신청',
-    path: 'register',
-    icon : PencilLine
-
+    id: 2,
+    name: "SW 마일리지 토큰",
+    root: "token",
+    icon: Coins,
+    subMenu: [
+      {
+        id: 201,
+        name: "토큰 생성 및 배포",
+        root: "create",
+      },
+      {
+        id: 202,
+        name: "토큰 활성화",
+        root: "activate",
+      },
+      {
+        id: 203,
+        name: "배포 내역",
+        root: "history",
+      }
+    ],
   },
   {
-    label: '신청 내역',
-    type: 'route',
-
-    path: 'list',
-    icon : List
+    id: 3,
+    name: "신청 내역 관리",
+    root: "list",
+    icon: List,
+    subMenu: [],
   },
   {
-    label: '내 정보',
-    type: 'route',
-
-    path: 'profile',
-    icon : UserCog
+    id: 4,
+    name: "토큰 지급",
+    root: "mint",
+    icon: HandCoins,
+    subMenu: [
+      {
+        id: 401,
+        name: "지급하기",
+        root: "execute",
+      },
+      {
+        id: 402,
+        name: "지급 내역",
+        root: "history",
+      },
+    ],
   },
   {
-    label: '마일리지 랭킹',
-    type: 'link',
-    path: `${process.env.REACT_APP_API_KLAYSCOPE_URL}`,
-    icon : SquareArrowOutUpRight
-  }
+    id: 5,
+    name: "토큰 회수",
+    root: "burn",
+    icon: Flame,
+    subMenu: [
+      {
+        id: 401,
+        name: "회수하기",
+        root: "execute",
+      },
+      {
+        id: 402,
+        name: "회수 내역",
+        root: "history",
+      },
+    ],
+  },
 ]
-
-export {
-  MENUS
-}
-
-export type {
-  MenuItem
-}

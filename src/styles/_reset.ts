@@ -9,6 +9,7 @@ export const GlobalStyle = css`
   }
 
   /* other styles */
+
   html, body, #root {
     width: 100%;
     height: 100%;
@@ -16,10 +17,11 @@ export const GlobalStyle = css`
     line-height: 1.3 !important;
     --main-color: #a40f16;
     --kaikas-color: #3366FF;
-    --side-bar-color: #363740;
+    //--side-bar-color: #ffffff;
+    --side-bar-color: #282729;
     --bg-color: #F7F8FC;
     --border-color: #DFE0EB;
-    
+
     --default-transition: all ease-in-out 0.15s
   }
 
@@ -112,6 +114,7 @@ export const GlobalStyle = css`
   }
 
   /* HTML5 display-role reset for older browsers */
+
   article,
   aside,
   details,
@@ -175,7 +178,7 @@ export const GlobalStyle = css`
     border: 1px solid var(--chakra-colors-gray-600) !important;
     outline: 1px solid var(--chakra-colors-gray-600) !important;
   }
-  
+
   input:focus {
     outline: none;
   }
@@ -206,21 +209,22 @@ export const GlobalStyle = css`
     width: 8px;
     height: 4px;
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: 20px;
     background-color: var(--chakra-colors-blackAlpha-300);
   }
 
   //pagination
-  
-  .pagination-table{
+
+  .pagination-table {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 20px;
   }
 
-  .pagination-nav{
+  .pagination-nav {
     display: flex;
     justify-content: center;
   }

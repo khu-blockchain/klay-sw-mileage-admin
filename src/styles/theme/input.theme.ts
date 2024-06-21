@@ -4,7 +4,7 @@ import { createMultiStyleConfigHelpers } from '@chakra-ui/react'
 const { definePartsStyle, defineMultiStyleConfig } =
         createMultiStyleConfigHelpers(inputAnatomy.keys)
 
-const basic = definePartsStyle({
+const init = definePartsStyle({
   // define the part you're going to style
   field: {
     height: '56px',
@@ -17,7 +17,7 @@ const basic = definePartsStyle({
 })
 
 const inputTheme = defineMultiStyleConfig({
-  variants: {basic}
+  variants: {init}
 })
 
 export {
