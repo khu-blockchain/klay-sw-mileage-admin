@@ -12,7 +12,7 @@ import {
   Checkbox,
   Input,
   Button,
-  Select, UnorderedList, ListItem, Divider
+  Select, UnorderedList, ListItem, Divider, InputGroup, InputLeftElement, InputRightElement
 } from "@chakra-ui/react";
 import useIsAble from "@/hooks/useAble";
 import KaiKasConnectButton from "@/components/atom/KaiKasConnecButtont";
@@ -22,6 +22,7 @@ import {useNavigate} from "react-router-dom";
 import {caver} from "@/App";
 import {useSignUp} from "@/feature/queries/student.queries";
 import LVStack from "@/components/atom/LVStack";
+import {UserRound, EyeOff, Eye} from "lucide-react";
 
 const SignUp = () => {
   const [step, setStep] = useState<number>(0)
@@ -64,6 +65,9 @@ const SignUpDescription = () => {
 const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   const {state, setState} = useSignUpStore((state) => state)
 
+  const [passwordShow, setPasswordShow] = useState(false)
+  const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
+
   const canNext = useIsAble([
     state.studentId !== '',
     state.password !== '',
@@ -80,18 +84,34 @@ const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
                type={'text'}/>
       </FormControl>
       <FormControl>
-        <Input variant={'basic'}
-               value={state.password}
-               onChange={(e) => setState('password', e.target.value)}
-               placeholder={'비밀번호를 입력해주세요.'}
-               type={'password'}/>
+        <InputGroup>
+          <Input variant={'basic'}
+                 value={state.password}
+                 onChange={(e) => setState('password', e.target.value)}
+                 placeholder={'비밀번호를 입력해주세요.'}
+                 type={passwordShow ? 'text' : 'password'}/>
+          <InputRightElement w={'56px'} h={'56px'}>
+            {passwordShow ?
+              <Eye cursor={'pointer'} onClick={() => setPasswordShow(false)} width={'20px'} color={'var(--chakra-colors-gray-400)'}/> :
+              <EyeOff cursor={'pointer'} onClick={() => setPasswordShow(true)} width={'20px'} color={'var(--chakra-colors-gray-400)'}/>
+            }
+          </InputRightElement>
+        </InputGroup>
       </FormControl>
       <FormControl>
-        <Input variant={'basic'}
-               value={state.confirmPassword}
-               onChange={(e) => setState('confirmPassword', e.target.value)}
-               placeholder={'동일한 비밀번호를 입력해주세요.'}
-               type={'password'}/>
+        <InputGroup>
+          <Input variant={'basic'}
+                 value={state.confirmPassword}
+                 onChange={(e) => setState('confirmPassword', e.target.value)}
+                 placeholder={'동일한 비밀번호를 입력해주세요.'}
+                 type={confirmPasswordShow ? 'text' : 'password'}/>
+          <InputRightElement w={'56px'} h={'56px'}>
+            {confirmPasswordShow ?
+              <Eye cursor={'pointer'} onClick={() => setConfirmPasswordShow(false)} width={'20px'} color={'var(--chakra-colors-gray-400)'}/> :
+              <EyeOff cursor={'pointer'} onClick={() => setConfirmPasswordShow(true)} width={'20px'} color={'var(--chakra-colors-gray-400)'}/>
+            }
+          </InputRightElement>
+        </InputGroup>
       </FormControl>
       <Divider borderColor={'var(--chakra-colors-gray-300)'}/>
       <Flex w={'100%'} justify={'flex-end'}>
@@ -215,7 +235,8 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
     <VStack align={'center'} w={'100%'} spacing={'24px'}>
       <FormControl>
         <HStack w={'100%'} spacing={'10px'}>
-          <Select h={'56px'} w={'200px'} borderRadius={'12px'} borderColor={'var(--chakra-colors-gray-300)'} placeholder='은행 선택' onChange={(e) => setState('bankCode', e.target.value)}>
+          <Select bgColor={'var(--chakra-colors-gray-50)'} h={'56px'} w={'200px'} borderRadius={'12px'} borderColor={'var(--chakra-colors-gray-300)'}
+                  placeholder='은행 선택' onChange={(e) => setState('bankCode', e.target.value)}>
             {Object.keys(BANK_CODE).map((el: string) => (
               <option value={el}>{BANK_CODE[el]}</option>
             ))}
@@ -253,7 +274,8 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
                 onClick={() => setStep(prev => prev - 1)}>
           이전
         </Button>
-        <Button color={'var(--main-color)'} variant={'link'} onClick={() => onSignUp()} isLoading={isPending} isDisabled={!canSignUp} size={'md'}>
+        <Button color={'var(--main-color)'} variant={'link'} onClick={() => onSignUp()} isLoading={isPending}
+                isDisabled={!canSignUp} size={'md'}>
           회원가입
         </Button>
       </Flex>
