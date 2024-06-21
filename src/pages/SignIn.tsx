@@ -15,7 +15,7 @@ import {
 import useIsAble from "@/hooks/useAble";
 import {useNavigate} from "react-router-dom";
 import md5 from 'md5';
-import BasicButton from "@/components/atom/BasicButton";
+import BasicLargeButton from "@/components/atom/BasicLargeButton";
 import useStudentStore from "@/store/global/useStudentStore";
 import {TokenType} from "@/store/types";
 import {setLocalStorageData} from "@/utils/webStorage.utils";
@@ -90,9 +90,9 @@ const SignIn = () => {
                      type={'password'}/>
             </InputGroup>
           </FormControl>
-          <BasicButton isLoading={isPending} onClick={() => onSignIn()} isDisabled={!canLogin} w={'100%'}>
+          <BasicLargeButton isLoading={isPending} onClick={() => onSignIn()} isDisabled={!canLogin} w={'100%'}>
             로그인
-          </BasicButton>
+          </BasicLargeButton>
           <HStack w={'100%'} align={'flex-start'} spacing={'6px'}>
             <Text color={'var(--chakra-colors-gray-500)'} fontSize={'14px'}>계정이 없으신가요?</Text>
             <Button color={'var(--main-color)'} onClick={() => navigate('/sign-up')} fontWeight={400} variant={'link'}

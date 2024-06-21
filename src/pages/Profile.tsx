@@ -15,13 +15,14 @@ import {
 import BasicInput from "@/components/atom/BasicInput";
 import FormWrapper from "@/components/FormWrapper";
 import useStudentStore from "@/store/global/useStudentStore";
-import BasicButton from "@/components/atom/BasicButton";
+import BasicLargeButton from "@/components/atom/BasicLargeButton";
 import {BANK_CODE} from "@/assets/constants/bankCode.data";
 import BasicSelect from "@/components/atom/BasicSelect";
 import KaiKasConnectButton from "@/components/atom/KaiKasConnecButtont";
 import {useUpdateStudentInfo} from "@/feature/queries/student.queries";
 import useIsAble from "@/hooks/useAble";
 import {caver} from "@/App";
+import BasicButton from "@/components/atom/BasicButton";
 
 const Profile = () => {
   const toast = useToast();

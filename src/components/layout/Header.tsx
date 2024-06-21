@@ -1,8 +1,9 @@
 import React, {useMemo} from 'react';
 import {Button, Flex, Text} from "@chakra-ui/react";
 import {useLocation, useNavigate} from "react-router-dom";
-import BasicButton from "@/components/atom/BasicButton";
+import BasicLargeButton from "@/components/atom/BasicLargeButton";
 import {removeLocalStorageData} from "@/utils/webStorage.utils";
+import BasicButton from "@/components/atom/BasicButton";
 
 const Header = () => {
   const location = useLocation();

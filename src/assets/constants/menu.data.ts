@@ -1,34 +1,45 @@
-import {Info, List, LucideIcon, PencilLine, UserCog} from "lucide-react";
+import {Info, List, LucideIcon, PencilLine, UserCog, SquareArrowOutUpRight} from "lucide-react";
 
 type MenuItem = {
   label: string
-  route: string
+  type: 'route' | 'link',
+  path: string
   icon: LucideIcon
 }
 
 const MENUS: Array<MenuItem> = [
   {
     label: 'SW 마일리지',
-    route: '',
+    type: 'route',
+    path: '',
     icon : Info
   },
   {
+    type: 'route',
     label: 'SW 마일리지 신청',
-    route: 'register',
+    path: 'register',
     icon : PencilLine
 
   },
   {
     label: '신청 내역',
-    route: 'list',
+    type: 'route',
+
+    path: 'list',
     icon : List
-
-
   },
   {
     label: '내 정보',
-    route: 'profile',
+    type: 'route',
+
+    path: 'profile',
     icon : UserCog
+  },
+  {
+    label: '마일리지 랭킹',
+    type: 'link',
+    path: `${process.env.REACT_APP_API_KLAYSCOPE_URL}`,
+    icon : SquareArrowOutUpRight
   }
 ]
 

@@ -25,7 +25,7 @@ import BasicTextarea from "@/components/atom/BasicTextarea";
 import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
 import BigNumber from "bignumber.js";
 import {caver, provider} from "@/App";
-import BasicButton from "@/components/atom/BasicButton";
+import BasicLargeButton from "@/components/atom/BasicLargeButton";
 import BasicInput from "@/components/atom/BasicInput";
 import WithLabel from "@/components/WithLabel";
 import {useDropzone} from "react-dropzone";
@@ -36,6 +36,8 @@ import FormWrapper from "@/components/FormWrapper";
 import {useApproval} from "@/feature/queries/swMileageTokens.queries";
 import {useRegisterSwMileage} from "@/feature/queries/swMileage.queries";
 import BasicSelect from "@/components/atom/BasicSelect";
+import BasicButton from "@/components/atom/BasicButton";
+import {useNavigate} from "react-router-dom";
 
 const adminaddress = '0x5775fF7AFAF1EA237Cfe75B152F39333C66Fa4A7'
 
@@ -45,7 +47,9 @@ const RegisterMileage = () => {
   const {activityFields, getActivityCategories} = useActivityFieldStore(state => state);
   const {kip7, swMileageToken} = useSwMileageTokenStore(state => state);
 
+  console.log(swMileageToken)
   const toast = useToast();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [extracurricularActivity, setExtracurricularActivity] = useState<string>('')
   const [extracurricularActivityClassification, setExtracurricularActivityClassification] = useState<string>('')
@@ -74,7 +78,13 @@ const RegisterMileage = () => {
 
   const {mutate: registerSwMileageMutate, isPending} = useRegisterSwMileage({
     onSuccessFn: async (data) => {
-      console.log(data)
+      toast({
+        title      : `SW 마일리지 신청이 제출되었습니다.`,
+        status     : 'success',
+        isClosable : true,
+        position   : "top",
+      })
+      navigate('/list')
     },
     onErrorFn  : (error: any) => toast({
       title      : `${error.response.data.code}:: 문제가 발생했습니다.`,

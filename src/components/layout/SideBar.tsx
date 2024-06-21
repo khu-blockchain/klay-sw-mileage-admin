@@ -3,6 +3,7 @@ import LVStack from "@/components/atom/LVStack";
 import {useMemo} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {MenuItem, MENUS} from "@/assets/constants/menu.data";
+import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
 
 
 const SideBar = () => {
@@ -23,15 +24,27 @@ export default SideBar;
 const Menu = ({menu}: {menu: MenuItem}) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const {swMileageToken} = useSwMileageTokenStore(state => state)
 
   const isSelected = useMemo(() => {
-    return location.pathname.split('/')[1] === menu.route
+    return location.pathname.split('/')[1] === menu.path
   }, [location, menu])
 
   const Icon = menu.icon;
 
+  const onClickMenu = () => {
+    if(menu.type === 'route'){
+      navigate(menu.path)
+      return;
+    }
+    if(!swMileageToken){
+      return;
+    }
+    window.open(`${menu.path}token/${swMileageToken.contract_address}?tabId=tokenHolder`)
+  }
+
   return (
-    <HStack cursor={'pointer'} w={'100%'} h={'56px'} spacing={'24px'} onClick={() => navigate(menu.route)}>
+    <HStack cursor={'pointer'} w={'100%'} h={'56px'} spacing={'24px'} onClick={() => onClickMenu()}>
       <Box transition={'var(--default-transition)'} w={'3px'} h={'100%'} bgColor={isSelected ? '#DDE2FF' : 'transparent'}/>
       <HStack spacing={'10px'}>
         <Icon style={{transition: 'var(--default-transition)'}} color={isSelected ? '#DDE2FF' : '#9FA2B4'}/>
