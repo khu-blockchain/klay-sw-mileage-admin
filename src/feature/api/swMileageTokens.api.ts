@@ -15,7 +15,6 @@ const getSwMileageTokenList: API<getSwMileageTokenListRequest, getSwMileageToken
 const approveSwMileageToken: API<approveSwMileageTokenRequest, approveSwMileageTokenResponse> = async(request) => {
   try{
     const result = await SwMileageTokenServer.post(`/${request.params.swMileageTokenId}/approve`, request.body)
-    console.log(result)
     return result.data;
   }catch (e) {
     throw e

@@ -47,7 +47,6 @@ const RegisterMileage = () => {
   const {activityFields, getActivityCategories} = useActivityFieldStore(state => state);
   const {kip7, swMileageToken} = useSwMileageTokenStore(state => state);
 
-  console.log(swMileageToken)
   const toast = useToast();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('')
@@ -335,7 +334,6 @@ const FileContainer = (props: FileContainerProps) => {
   const {getRootProps, getInputProps} = useDropzone({
     maxFiles: 1,
     onDrop  : acceptedFiles => {
-      console.log(acceptedFiles)
       const file = acceptedFiles[0]
       setFiles(prev => prev.map((el, idx) => {
         if(index === idx) return file;
