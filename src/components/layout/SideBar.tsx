@@ -1,4 +1,4 @@
-import {VStack, Image, Flex, HStack, Box, Text} from "@chakra-ui/react";
+import {VStack, Image, Flex, HStack, Text} from "@chakra-ui/react";
 import LVStack from "@/components/atom/LVStack";
 import {useEffect, useMemo, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -66,12 +66,12 @@ const SNBMenu = ({menu}: { menu: Menu }) => {
   return (
     <>
       <VStack borderTop={'1px solid var(--chakra-colors-gray-600)'} w={'100%'} bgColor={'transparent'} onClick={() => onClickMenu()} spacing={0}>
-        <HStack w={'100%'} justify={'space-between'} align={'center'} p={'14px 10px'} cursor={'pointer'} transition={'all 0.15s ease-in-out, margin-bottom 0s ease-in-out'}>
+        <HStack w={'100%'} justify={'space-between'} align={'center'} p={'14px'} cursor={'pointer'} transition={'all 0.15s ease-in-out, margin-bottom 0s ease-in-out'}>
           <HStack align={'center'} spacing={'8px'}>
             <MenuIcon width={'20px'} color={'#ffffff'}/>
             <Text fontSize={'14px'} color={"#ffffff"}>{menu.name}</Text>
           </HStack>
-          {menu.subMenu.length !== 0 && <ChevronRight color={'#ffffff'} transform={isOpen ? 'rotate(90)' : 'none'} style={{transition: 'all ease-in-out 0.15s'}}/>}
+          {menu.subMenu.length !== 0 && <ChevronRight size={'18px'} color={'#ffffff'} transform={isOpen ? 'rotate(90)' : 'rotate(0)'} style={{transition: 'all ease-in-out 0.15s'}}/>}
         </HStack>
         <SliderContainer currentHeight={currentHeight} isOpen={isOpen}>
           {menu.subMenu.map((subMenu, index) => (

@@ -12,6 +12,8 @@ import SwMileageInfo from "@/pages/SwMileageInfo";
 import {useRefresh} from "@/feature/queries/auth.queries";
 import {useGetActivityField} from "@/feature/queries/activityField.queries";
 import {useGetSwMileageTokenList} from "@/feature/queries/swMileageTokens.queries";
+import ManageSwMileageToken from "@/pages/ManageSwMileageToken";
+import CreateSwMileageToken from "@/pages/CreateSwMileageToken";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -81,9 +83,8 @@ const RootRouter = () => {
         <Route element={<MainLayout/>}>
           <Route index path={'/'} element={<SwMileageInfo/>}/>
           <Route path={'token/*'}>
-            <Route path={'create'} element={<SwMileageInfo/>}/>
-            <Route path={'activate'} element={<SwMileageInfo/>}/>
-            <Route path={'history'} element={<SwMileageInfo/>}/>
+            <Route path={'manage'} element={<ManageSwMileageToken/>}/>
+            <Route path={'create'} element={<CreateSwMileageToken/>}/>
           </Route>
           <Route path={'list'} element={<SwMileageInfo/>}/>
           <Route path={'mint/*'}>

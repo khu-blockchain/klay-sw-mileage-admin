@@ -1,21 +1,34 @@
 import React, {useMemo} from 'react';
-import {Button, Flex, Text} from "@chakra-ui/react";
-import {useLocation, useNavigate} from "react-router-dom";
-import BasicLargeButton from "@/components/atom/BasicLargeButton";
+import {Flex, Text} from "@chakra-ui/react";
+import {useLocation} from "react-router-dom";
 import {removeLocalStorageData} from "@/utils/webStorage.utils";
 import BasicButton from "@/components/atom/BasicButton";
 
 const Header = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const nav = useMemo(() => {
-    switch (location.pathname.split('/')[1]){
-      case '': return 'SW 마일리지'
-      case 'register': return 'SW 마일리지 신청'
-      case 'list': return '신청 내역'
-      case 'profile': return '내 정보'
-      default : return ''
+    const root = location.pathname.split('/')[1];
+    const subRoot = location.pathname.split('/')[2];
+
+    switch (root) {
+      case '':
+        return 'SW 마일리지'
+      case 'token': {
+        if(subRoot === 'create') return '토큰 생성 및 배포'
+        else return '토큰 관리'
+      }
+      case 'list': return '신청 내역 관리'
+      case 'mint': {
+        if(subRoot === 'execute') return '토큰 지급'
+        else return '토큰 지급 내역'
+      }
+      case 'burn': {
+        if(subRoot === 'execute') return '토큰 회수'
+        else return '토큰 회수 내역'
+      }
+      default :
+        return ''
     }
   }, [location])
 

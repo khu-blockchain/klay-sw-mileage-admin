@@ -32,19 +32,14 @@ export const MENU: Array<Menu> = [
     subMenu: [
       {
         id: 201,
-        name: "토큰 생성 및 배포",
-        root: "create",
+        name: "토큰 관리",
+        root: "manage",
       },
       {
         id: 202,
-        name: "토큰 활성화",
-        root: "activate",
+        name: "토큰 생성 및 배포",
+        root: "create",
       },
-      {
-        id: 203,
-        name: "배포 내역",
-        root: "history",
-      }
     ],
   },
   {
