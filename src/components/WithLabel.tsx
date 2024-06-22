@@ -1,4 +1,4 @@
-import {FormControl, FormControlProps, FormLabel, Text} from "@chakra-ui/react";
+import {FormControl, FormControlProps, Text} from "@chakra-ui/react";
 import LVStack from "@/components/atom/LVStack";
 import React from "react";
 

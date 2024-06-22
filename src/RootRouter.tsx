@@ -11,7 +11,7 @@ import MainLayout from "@/components/layout/MainLayout";
 import SwMileageInfo from "@/pages/SwMileageInfo";
 import {useRefresh} from "@/feature/queries/auth.queries";
 import {useGetActivityField} from "@/feature/queries/activityField.queries";
-import {useGetSwMileageTokenList} from "@/feature/queries/swMileageTokens.queries";
+import {useGetActivateSwMileageToken} from "@/feature/queries/swMileageTokens.queries";
 import ManageSwMileageToken from "@/pages/ManageSwMileageToken";
 import CreateSwMileageToken from "@/pages/CreateSwMileageToken";
 
@@ -116,7 +116,7 @@ const Init = () => {
 const Auth = () => {
   const {getAdmin} = useAdminStore((state) => state)
   useGetActivityField({});
-  useGetSwMileageTokenList({})
+  useGetActivateSwMileageToken({})
   if(getAdmin().admin_id === -1) {
     return <Navigate to={'/sign-in'}/>
   }
