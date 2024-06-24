@@ -23,7 +23,7 @@ const SwMileageTokenCreate = () => {
     description !== ''
   ])
 
-  const {mutate} = useCreateMileageToken({
+  const {mutate, isPending} = useCreateMileageToken({
     onSuccessFn: async (res) => {
       toast({
         title     : `새로운 SW 마일리지 토큰이 생성되었습니다.`,
@@ -82,7 +82,7 @@ const SwMileageTokenCreate = () => {
           </WithLabel>
         </Grid>
         <Flex w={'100%'} justify={'flex-end'}>
-          <BasicButton onClick={() => createToken()} isDisabled={!isAble}>
+          <BasicButton isLoading={isPending} onClick={() => createToken()} isDisabled={!isAble}>
             생성하기
           </BasicButton>
         </Flex>

@@ -12,7 +12,8 @@ type SwMileage = {
   extracurricular_activity_classification: string;
   status: number // 1: 생성, 2: 승인, 3: 반려
   created_at: string;
-  updated_at: string
+  updated_at: string;
+  sw_mileage_files: Array<SwMileageFile>
 }
 
 type SwMileageFile = {
