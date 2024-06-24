@@ -10,7 +10,7 @@ import BasicButton from "@/components/atom/BasicButton";
 import useAble from "@/hooks/useAble";
 import {useNavigate} from "react-router-dom";
 
-const CreateSwMileageToken = () => {
+const SwMileageTokenCreate = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [name, setName] = useState<string>('')
@@ -91,7 +91,7 @@ const CreateSwMileageToken = () => {
   );
 };
 
-export default CreateSwMileageToken;
+export default SwMileageTokenCreate;
 
 
 

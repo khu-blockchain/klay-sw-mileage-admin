@@ -18,7 +18,10 @@ type SwMileage = {
 type SwMileageFile = {
   sw_mileage_file_id: number;
   sw_mileage_id: number;
+  name: string;
   url: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export type {

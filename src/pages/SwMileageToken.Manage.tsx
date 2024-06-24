@@ -18,7 +18,7 @@ import {reduceAddress} from "@/utils/web3.utils";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useQueryClient} from "@tanstack/react-query";
 
-const ManageSwMileageToken = () => {
+const SwMileageTokenManage = () => {
   const toast = useToast();
   const {isOpen, onOpen, onClose} = useDisclosure()
 
@@ -63,13 +63,12 @@ const ManageSwMileageToken = () => {
         name            : <Text>{el.sw_mileage_token_name}</Text>,
         contract_address:
           <CopyToClipboard text={el.contract_address} onCopy={() => onCopyCA()}>
-            <Button variant={'link'}>{reduceAddress(el.contract_address)}</Button>
+            <Button variant={'link'} colorScheme={'facebook'}>{reduceAddress(el.contract_address)}</Button>
           </CopyToClipboard>,
         symbol          : <Text>{el.sw_mileage_token_symbol}</Text>,
         created_at      : <Text>{parseToFormattedDate(el.created_at)}</Text>,
         is_activated    :
-          <Badge onClick={() => onActivateToken(el)} cursor={'pointer'}
-                 colorScheme={Boolean(el.is_activated) ? 'green' : 'red'}>
+          <Badge onClick={() => onActivateToken(el)} cursor={'pointer'} colorScheme={Boolean(el.is_activated) ? 'green' : 'red'}>
             {Boolean(el.is_activated) ? '활성화' : '비활성화'}
           </Badge>
       }
@@ -138,7 +137,7 @@ const ManageSwMileageToken = () => {
                   <Text>{swMileageToken.sw_mileage_token_name}</Text>
                 </DataField>
                 <DataField label={'컨트랙트 주소'}>
-                  <Text>{swMileageToken.contract_address}</Text>
+                  <Button variant={'link'} colorScheme={'facebook'}>{swMileageToken.contract_address}</Button>
                 </DataField>
                 <DataField label={'설명'}>
                   <Text w={'360px'} whiteSpace={'pre-wrap'}>{swMileageToken.description}</Text>
@@ -167,7 +166,7 @@ const ManageSwMileageToken = () => {
   );
 };
 
-export default ManageSwMileageToken;
+export default SwMileageTokenManage;
 
 const ActivateAlert = (
   {

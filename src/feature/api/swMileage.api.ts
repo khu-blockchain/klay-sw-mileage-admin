@@ -1,7 +1,15 @@
 import {SwMileageServer} from "@/feature/serverInstance";
 import {API} from "@/feature";
-import {getSwMileageByIdRequest, getSwMileageListRequest} from "../types/swMileage.request";
-import {getSwMileageByIdResponse, getSwMileageListResponse} from "@/feature/types/swMileage.response";
+import {
+  getSwMileageByIdRequest,
+  getSwMileageFileByIdRequest,
+  getSwMileageListRequest
+} from "../types/swMileage.request";
+import {
+  getSwMileageByIdResponse,
+  getSwMileageFileByIdResponse,
+  getSwMileageListResponse
+} from "@/feature/types/swMileage.response";
 import {makeQuery} from "@/feature/utils";
 
 const getSwMileageList: API<getSwMileageListRequest, getSwMileageListResponse> = async(request) => {
@@ -22,9 +30,9 @@ const getSwMileageById: API<getSwMileageByIdRequest, getSwMileageByIdResponse> =
   }
 }
 
-const getSwMileageFileById: API<getSwMileageByIdRequest, getSwMileageByIdResponse> = async(request) => {
+const getSwMileageFileById: API<getSwMileageFileByIdRequest, getSwMileageFileByIdResponse> = async(request) => {
   try{
-    const result = await SwMileageServer.get(`${request.params.swMileageId}`)
+    const result = await SwMileageServer.get(`${request.params.swMileageFileId}`)
     return result.data;
   }catch (e) {
     throw e
@@ -37,4 +45,5 @@ const getSwMileageFileById: API<getSwMileageByIdRequest, getSwMileageByIdRespons
 export {
   getSwMileageList as getSwMileageListAPI,
   getSwMileageById as getSwMileageByIdAPI,
+  getSwMileageFileById as getSwMileageFileByIdAPI,
 }

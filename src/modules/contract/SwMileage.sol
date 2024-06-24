@@ -37,6 +37,8 @@ contract SwMileage is KIP7, KIP7Burnable, Pausable, Ownable {
     whenNotPaused
     override
     {
+        // mint 트랜잭션 들어가는지 확인
+        assert(from != address(0) || to != address(0));
         super._beforeTokenTransfer(from, to, amount);
     }
 }
