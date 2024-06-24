@@ -1,19 +1,19 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {Mutation, Query} from "@/feature";
 import {
-  activateSwMileageTokenRequest,
+  activateSwMileageTokenRequest, burnSwMileageTokenRequest,
   createSwMileageTokenRequest,
-  getSwMileageTokenListRequest
+  getSwMileageTokenListRequest, mintSwMileageTokenRequest
 } from "@/feature/types/swMileageTokens.request";
 import {
-  activateSwMileageTokenResponse,
+  activateSwMileageTokenResponse, burnSwMileageTokenResponse,
   createSwMileageTokenResponse,
-  getSwMileageTokenListResponse
+  getSwMileageTokenListResponse, mintSwMileageTokenResponse
 } from "@/feature/types/swMileageTokens.response";
 import {
-  activateSwMileageTokenAPI,
+  activateSwMileageTokenAPI, burnSwMileageTokenAPI,
   createSwMileageTokenAPI,
-  getSwMileageTokenListAPI
+  getSwMileageTokenListAPI, mintSwMileageTokenAPI
 } from "@/feature/api/swMileageTokens.api";
 import useAdminStore from "@/store/global/useAdminStore";
 import {caver} from "@/App";
@@ -68,11 +68,30 @@ const useCreateMileageToken: Mutation<createSwMileageTokenRequest, createSwMilea
   })
 }
 
+const useMintMileageToken: Mutation<mintSwMileageTokenRequest, mintSwMileageTokenResponse> = (args) => {
+  const {onSuccessFn, onErrorFn} = args
+  return useMutation({
+    mutationFn: async(data) => mintSwMileageTokenAPI(data),
+    ...(onSuccessFn && {onSuccess: (res: mintSwMileageTokenResponse) => onSuccessFn(res)}),
+    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
+  })
+}
+
+const useBurnMileageToken: Mutation<burnSwMileageTokenRequest, burnSwMileageTokenResponse> = (args) => {
+  const {onSuccessFn, onErrorFn} = args
+  return useMutation({
+    mutationFn: async(data) => burnSwMileageTokenAPI(data),
+    ...(onSuccessFn && {onSuccess: (res: burnSwMileageTokenResponse) => onSuccessFn(res)}),
+    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
+  })
+}
 
 
 export {
   useGetActivateSwMileageToken,
   useGetSwMileageTokenList,
   useCreateMileageToken,
-  useActivateMileageToken
+  useActivateMileageToken,
+  useMintMileageToken,
+  useBurnMileageToken
 }

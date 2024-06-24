@@ -1,14 +1,14 @@
 import {SwMileageTokenServer} from "@/feature/serverInstance";
 import {API} from "@/feature";
 import {
-  activateSwMileageTokenRequest,
+  activateSwMileageTokenRequest, burnSwMileageTokenRequest,
   createSwMileageTokenRequest,
-  getSwMileageTokenListRequest
+  getSwMileageTokenListRequest, mintSwMileageTokenRequest
 } from "@/feature/types/swMileageTokens.request";
 import {
-  activateSwMileageTokenResponse,
+  activateSwMileageTokenResponse, burnSwMileageTokenResponse,
   createSwMileageTokenResponse,
-  getSwMileageTokenListResponse
+  getSwMileageTokenListResponse, mintSwMileageTokenResponse
 } from "@/feature/types/swMileageTokens.response";
 
 const getSwMileageTokenList: API<getSwMileageTokenListRequest, getSwMileageTokenListResponse> = async() => {
@@ -38,8 +38,28 @@ const createSwMileageToken: API<createSwMileageTokenRequest, createSwMileageToke
   }
 }
 
+const mintSwMileageToken: API<mintSwMileageTokenRequest, mintSwMileageTokenResponse> = async(request) => {
+  try{
+    const result = await SwMileageTokenServer.post(`${request.params.swMileageTokenId}/mint`, request.body)
+    return result.data;
+  }catch (e) {
+    throw e
+  }
+}
+
+const burnSwMileageToken: API<burnSwMileageTokenRequest, burnSwMileageTokenResponse> = async(request) => {
+  try{
+    const result = await SwMileageTokenServer.post(`${request.params.swMileageTokenId}/burn-from`, request.body)
+    return result.data;
+  }catch (e) {
+    throw e
+  }
+}
+
 export {
   getSwMileageTokenList as getSwMileageTokenListAPI,
   activateSwMileageToken as activateSwMileageTokenAPI,
   createSwMileageToken as createSwMileageTokenAPI,
+  mintSwMileageToken as mintSwMileageTokenAPI,
+  burnSwMileageToken as burnSwMileageTokenAPI,
 }

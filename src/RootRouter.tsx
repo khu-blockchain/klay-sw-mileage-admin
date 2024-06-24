@@ -16,6 +16,10 @@ import SwMileageTokenManage from "@/pages/SwMileageToken.Manage";
 import SwMileageTokenCreate from "@/pages/SwMileageToken.Create";
 import ManageSwMileageList from "@/pages/ManageSwMileage.List";
 import ManageSwMileageDetail from "@/pages/ManageSwMileage.Detail";
+import MintSwMileageExecute from "@/pages/MintSwMileage.Execute";
+import MintSwMileageHistory from "@/pages/MintSwMileage.History";
+import BurnSwMileageExecute from "@/pages/BurnSwMileage.Execute";
+import BurnSwMileageHistory from "@/pages/BurnSwMileage.History";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -93,12 +97,12 @@ const RootRouter = () => {
             <Route path={':id'} element={<ManageSwMileageDetail/>}/>
           </Route>
           <Route path={'mint/*'}>
-            <Route path={'execute'} element={<SwMileageInfo/>}/>
-            <Route path={'history'} element={<SwMileageInfo/>}/>
+            <Route path={'execute'} element={<MintSwMileageExecute/>}/>
+            <Route path={'history'} element={<MintSwMileageHistory/>}/>
           </Route>
           <Route path={'burn/*'}>
-            <Route path={'execute'} element={<SwMileageInfo/>}/>
-            <Route path={'history'} element={<SwMileageInfo/>}/>
+            <Route path={'execute'} element={<BurnSwMileageExecute/>}/>
+            <Route path={'history'} element={<BurnSwMileageHistory/>}/>
           </Route>
         </Route>
       </Route>

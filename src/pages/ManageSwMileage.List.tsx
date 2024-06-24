@@ -8,27 +8,12 @@ import {ACTIVITY_CATEGORIES} from "@/assets/constants/activityField.data";
 import StatusLabel from "@/components/StatusLabel";
 import {Text} from "@chakra-ui/react";
 import {PaginationTable} from "@/components/Pagenation";
-import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
 
 const ManageSwMileageList = () => {
 
   const {data} = useGetSWMileageList({query: {}});
 
-  const {kip7} = useSwMileageTokenStore(state => state);
-
-  const a = async() => {
-    console.log(kip7)
-    const result = await kip7?.detectInterface();
-    console.log(result)
-  }
-
-  useEffect(() => {
-    a()
-  }, [])
-
   const [swMileageFormList, setSwMileageFormList] = useState<Array<SwMileage>>([])
-
-  console.log(data)
 
   const header = [
     {

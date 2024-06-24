@@ -15,8 +15,30 @@ type createSwMileageToken = {
   }
 }
 
+type mintSwMileageToken = {
+  params: {
+    swMileageTokenId: number
+  },
+  body: {
+    studentId: string;
+    amount: number
+  }
+}
+
+type burnSwMileageToken = {
+  params: {
+    swMileageTokenId: number
+  },
+  body: {
+    studentId: string;
+    amount: number
+  }
+}
+
 export type {
   getSwMileageTokenList as getSwMileageTokenListRequest,
   activateSwMileageToken as activateSwMileageTokenRequest,
   createSwMileageToken as createSwMileageTokenRequest,
+  mintSwMileageToken as mintSwMileageTokenRequest,
+  burnSwMileageToken as burnSwMileageTokenRequest,
 }
