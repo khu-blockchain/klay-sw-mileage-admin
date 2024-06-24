@@ -3,7 +3,7 @@ import {Flex, Grid, useToast} from "@chakra-ui/react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
 import useAble from "@/hooks/useAble";
-import {useBurnMileageToken, useMintMileageToken} from "@/feature/queries/swMileageTokens.queries";
+import {useBurnMileageToken} from "@/feature/queries/swMileageTokens.queries";
 import Wrapper from "@/components/Wrapper";
 import FormWrapper from "@/components/FormWrapper";
 import WithLabel from "@/components/WithLabel";
