@@ -33,7 +33,7 @@ contract SwMileage is KIP7, KIP7Burnable, Pausable, Ownable {
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)
-    internal onlyOwner
+    internal
     whenNotPaused
     override
     {
