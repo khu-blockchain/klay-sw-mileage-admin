@@ -49,7 +49,7 @@ const ManageSwMileageList = () => {
   ]
 
   const tableData = (data: Array<SwMileage>) => {
-    return data.concat(...data,...data,...data,...data,...data,...data).map(swMileage => {
+    return data.map(swMileage => {
       return {
         id                      : swMileage.sw_mileage_id,
         name                    : <Text>{swMileage.name}</Text>,
