@@ -1,4 +1,4 @@
-import { usePagination } from "pagination-react-js"
+import {usePagination} from "pagination-react-js"
 import {ComponentProps, ReactNode} from "react";
 import BaseTable from "@/components/atom/BaseTable";
 
@@ -10,7 +10,7 @@ type PaginationItemProps = {
   rel?: ComponentProps<"li">["rel"]
 }
 
-const PaginationItem = ({ children, label, active, onClick, rel }: PaginationItemProps) => {
+const PaginationItem = ({children, label, active, onClick, rel}: PaginationItemProps) => {
   return (
     <li
       className={["pagination-item", active ? "pagination-item-active" : undefined].filter((value) => value).join(" ")}
@@ -31,21 +31,24 @@ export type PaginationProps = {
 }
 
 export const PaginationTable = ({data, headers, onClickRow}: PaginationProps) => {
-  const LIMIT = 15;
 
-  const { records, pageNumbers, setActivePage } = usePagination({
-    activePage: 1,
-    recordsPerPage: LIMIT,
-    totalRecordsLength: data.length,
-    offset: 2,
-    navCustomPageSteps: { prev: 3, next: 3 },
+  const limit = 15;
+
+  const {records, pageNumbers, setActivePage} = usePagination({
+    activePage          : 1,
+    recordsPerPage      : limit,
+    totalRecordsLength  : data.length,
+    offset              : 0,
+    navCustomPageSteps  : {prev: 3, next: 3},
     permanentFirstNumber: true,
-    permanentLastNumber: true,
+    permanentLastNumber : true,
   })
 
 
   function updateActivePage(pageNumber: number | false) {
-    pageNumber && setActivePage(pageNumber)
+    if(pageNumber) {
+      setActivePage(pageNumber)
+    }
   }
 
   return (
@@ -58,7 +61,7 @@ export const PaginationTable = ({data, headers, onClickRow}: PaginationProps) =>
         indexOfLast={records.indexOfLast}
       />
 
-      {data.length > LIMIT &&
+      {data.length > limit &&
         <nav className='pagination-nav' role="navigation" aria-label="Pagination Navigation">
           <ul className="pagination">
             <PaginationItem
@@ -110,7 +113,8 @@ export const PaginationTable = ({data, headers, onClickRow}: PaginationProps) =>
             })}
 
             {pageNumbers.customNextPage && (
-              <PaginationItem label={`Goto page ${pageNumbers.customNextPage}`} onClick={() => updateActivePage(pageNumbers.customNextPage)}>
+              <PaginationItem label={`Goto page ${pageNumbers.customNextPage}`}
+                              onClick={() => updateActivePage(pageNumbers.customNextPage)}>
                 &middot;&middot;&middot;
               </PaginationItem>
             )}

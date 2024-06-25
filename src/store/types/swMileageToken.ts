@@ -13,6 +13,7 @@ type SwMileageToken = {
   updated_at: string;
 }
 
+
 export type {
-  SwMileageToken
+  SwMileageToken,
 }

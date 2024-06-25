@@ -8,8 +8,10 @@ import {ACTIVITY_CATEGORIES} from "@/assets/constants/activityField.data";
 import StatusLabel from "@/components/StatusLabel";
 import {Text} from "@chakra-ui/react";
 import {PaginationTable} from "@/components/Pagenation";
+import {useNavigate} from "react-router-dom";
 
 const ManageSwMileageList = () => {
+  const navigate = useNavigate();
 
   const {data} = useGetSWMileageList({query: {}});
 
@@ -47,7 +49,7 @@ const ManageSwMileageList = () => {
   ]
 
   const tableData = (data: Array<SwMileage>) => {
-    return data.map(swMileage => {
+    return data.concat(...data,...data,...data,...data,...data,...data).map(swMileage => {
       return {
         id                      : swMileage.sw_mileage_id,
         name                    : <Text>{swMileage.name}</Text>,
@@ -61,18 +63,21 @@ const ManageSwMileageList = () => {
     })
   }
 
+  const onClickRegisteredMileage = (mileageId: number) => {
+    navigate(`${mileageId}`)
+  }
+
   useEffect(() => {
     if(data) {
       setSwMileageFormList(data)
     }
   }, [data])
 
+
   return (
     <Wrapper direction={'column'}>
       <FormWrapper title={'SW 마일리지 신청 목록'}>
-        <PaginationTable onClickRow={(data) => {
-          console.log(data)
-        }} headers={header} data={tableData(swMileageFormList)}/>
+        <PaginationTable onClickRow={(data) => onClickRegisteredMileage(data.id)} headers={header} data={tableData(swMileageFormList)}/>
       </FormWrapper>
     </Wrapper>
 

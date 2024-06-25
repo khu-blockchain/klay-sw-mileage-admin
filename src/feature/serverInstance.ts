@@ -7,6 +7,7 @@ const AuthServer = axios.create({baseURL: `${baseURL}auth`})
 const AcademicFieldServer = axios.create({baseURL: `${baseURL}academic-field`})
 const SwMileageServer = axios.create({baseURL: `${baseURL}sw-mileages`})
 const SwMileageTokenServer = axios.create({baseURL: `${baseURL}sw-mileage-tokens`})
+const SwMileageTokenHistoryServer = axios.create({baseURL: `${baseURL}sw-mileage-token-histories`})
 
 const setAuthorizationToInstanceHeader = (server: AxiosInstance, token: string) => {
   server.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -16,6 +17,7 @@ const updateAuthorization = (token: string) => {
   setAuthorizationToInstanceHeader(StudentServer, token)
   setAuthorizationToInstanceHeader(SwMileageServer, token)
   setAuthorizationToInstanceHeader(SwMileageTokenServer, token)
+  setAuthorizationToInstanceHeader(SwMileageTokenHistoryServer, token)
 }
 
 
@@ -25,5 +27,6 @@ export {
   StudentServer,
   AcademicFieldServer,
   SwMileageServer,
-  SwMileageTokenServer
+  SwMileageTokenServer,
+  SwMileageTokenHistoryServer
 }

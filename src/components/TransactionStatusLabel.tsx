@@ -1,21 +1,21 @@
 import React, {useMemo} from 'react';
 import {Badge} from "@chakra-ui/react";
 
-const StatusLabel = ({status}:{status: number}) => {
+const TransactionStatusLabel = ({status}:{status: number}) => {
 
   const statusStyle = useMemo(() => {
     switch (status){
       case 1: return {
         variant: 'created',
-        label: '심사 대기'
+        label: '생성'
       }
       case 2: return {
         variant: 'approved',
-        label: '승인'
+        label: '성공'
       }
-      case 3: return {
+      case 0: return {
         variant: 'denied',
-        label: '반려'
+        label: '실패'
       }
       default: return {
         variant: 'default',
@@ -30,4 +30,4 @@ const StatusLabel = ({status}:{status: number}) => {
   );
 };
 
-export default StatusLabel;
+export default TransactionStatusLabel;

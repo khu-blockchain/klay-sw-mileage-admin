@@ -18,8 +18,18 @@ type getSwMileageFileById = {
   }
 }
 
+type updateSwMileageStatus = {
+  params: {
+    swMileageId: number;
+  }
+  body: {
+    status: number
+  }
+}
+
 export type {
   getSwMileageList as getSwMileageListRequest,
   getSwMileageById as getSwMileageByIdRequest,
-  getSwMileageFileById as getSwMileageFileByIdRequest
+  getSwMileageFileById as getSwMileageFileByIdRequest,
+  updateSwMileageStatus as updateSwMileageStatusRequest
 }

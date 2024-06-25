@@ -32,7 +32,7 @@ const MintSwMileageExecute = () => {
         isClosable: true,
         position  : "top",
       })
-      navigate('/token/manage')
+      navigate('/list')
     },
     onErrorFn  : (error: any) => toast({
       title     : `${error.response.data.code}:: 문제가 발생했습니다. 다시 시도해주세요.`,
