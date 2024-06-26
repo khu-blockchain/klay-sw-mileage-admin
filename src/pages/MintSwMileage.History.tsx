@@ -12,13 +12,9 @@ import TransactionStatusLabel from "@/components/TransactionStatusLabel";
 
 const MintSwMileageHistory = () => {
 
-
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate()
-
   const [list, setList] = useState<Array<SwMileageTokenHistory>>([])
 
-  const {isFetching, data, refetch} = useGetMintHistories({
+  const {data} = useGetMintHistories({
     query: {
       transactionType: 'mint',
       isCount        : 0
