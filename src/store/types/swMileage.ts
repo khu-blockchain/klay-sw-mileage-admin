@@ -1,4 +1,5 @@
 type SwMileage = {
+  comment: string;
   sw_mileage_id: number;
   student_id: string;
   name: string;

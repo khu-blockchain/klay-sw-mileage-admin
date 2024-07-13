@@ -23,7 +23,8 @@ type updateSwMileageStatus = {
     swMileageId: number;
   }
   body: {
-    status: number
+    status: number;
+    comment: string
   }
 }
 
