@@ -18,7 +18,10 @@ const Header = () => {
         if(subRoot === 'create') return '토큰 생성 및 배포'
         else return '토큰 관리'
       }
-      case 'list': return '신청 내역 관리'
+      case 'student':
+        return '학생 정보 관리'
+      case 'list':
+        return '신청 내역 관리'
       case 'mint': {
         if(subRoot === 'execute') return '토큰 지급'
         else return '토큰 지급 내역'

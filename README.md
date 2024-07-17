@@ -37,7 +37,7 @@ Global Type으로 선언된 내용들이 작성된 파일이 존재하는 폴더
 
 ### 1. **Clone the repository**
 ```shell
-    git clone https://github.com/JeongEuiWang/klay-sw-mileage.git
+    git clone https://github.com/JeongEuiWang/klay-sw-mileage-admin.git
 ```
 ### 2. **Install Dependencies**
 ```shell

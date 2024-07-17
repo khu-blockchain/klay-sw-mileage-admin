@@ -20,6 +20,7 @@ import MintSwMileageExecute from "@/pages/MintSwMileage.Execute";
 import MintSwMileageHistory from "@/pages/MintSwMileage.History";
 import BurnSwMileageExecute from "@/pages/BurnSwMileage.Execute";
 import BurnSwMileageHistory from "@/pages/BurnSwMileage.History";
+import ManageStudent from "@/pages/ManageStudent";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -104,6 +105,7 @@ const RootRouter = () => {
             <Route path={'execute'} element={<BurnSwMileageExecute/>}/>
             <Route path={'history'} element={<BurnSwMileageHistory/>}/>
           </Route>
+          <Route index path={'student'} element={<ManageStudent/>}/>
         </Route>
       </Route>
 

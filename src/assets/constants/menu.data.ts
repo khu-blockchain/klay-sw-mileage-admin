@@ -1,4 +1,4 @@
-import {Info,Coins,List, HandCoins,Flame, LucideIcon} from 'lucide-react';
+import {Info,Coins,List, HandCoins,Flame, UserSearch, LucideIcon} from 'lucide-react';
 
 export type Menu = {
   // id는 1부터 시작하여 증가
@@ -44,13 +44,20 @@ export const MENU: Array<Menu> = [
   },
   {
     id: 3,
+    name: "학생 정보 관리",
+    root: "student",
+    icon: UserSearch,
+    subMenu: [],
+  },
+  {
+    id: 4,
     name: "신청 내역 관리",
     root: "list",
     icon: List,
     subMenu: [],
   },
   {
-    id: 4,
+    id: 5,
     name: "토큰 지급",
     root: "mint",
     icon: HandCoins,
@@ -68,7 +75,7 @@ export const MENU: Array<Menu> = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "토큰 회수",
     root: "burn",
     icon: Flame,
@@ -85,4 +92,5 @@ export const MENU: Array<Menu> = [
       },
     ],
   },
+
 ]

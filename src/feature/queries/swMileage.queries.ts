@@ -12,9 +12,7 @@ import {
   getSwMileageListResponse,
   updateSwMileageStatusResponse
 } from "@/feature/types/swMileage.response";
-import {mintSwMileageTokenRequest} from "@/feature/types/swMileageTokens.request";
 import {mintSwMileageTokenResponse} from "@/feature/types/swMileageTokens.response";
-import {mintSwMileageTokenAPI} from "@/feature/api/swMileageTokens.api";
 
 const useGetSWMileageList: Query<getSwMileageListRequest, getSwMileageListResponse> = (args) => {
   const  {getAdmin} = useAdminStore(state => state)

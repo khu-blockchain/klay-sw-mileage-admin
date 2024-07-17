@@ -21,7 +21,7 @@ const parseLocationRoot = (url: string) => {
 
 const SideBar = () => {
   return (
-    <VStack bgColor={'var(--side-bar-color)'} w={'100%'} h={'100%'} overflow={'hidden'} spacing={'20px'}>
+    <VStack bgColor={'var(--side-bar-color)'} w={'100%'} h={'100%'} overflow={'hidden'} spacing={0}>
       <Flex w={'100%'} h={'100px'} justify={'center'} align={'center'}>
         <Image w={'190px'} objectFit={'cover'} src={'https://swedu.khu.ac.kr/images/logo_swedu_white.png'}/>
       </Flex>
