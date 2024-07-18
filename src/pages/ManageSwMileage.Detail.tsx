@@ -77,7 +77,7 @@ const ManageSwMileageDetail = () => {
   const applyMileage = async() => {
     await mutate({
       params: {swMileageId: Number(id)},
-      body: {status: 2, comment: ''}
+      body: {status: 2, comment: '-'}
     })
   }
 
