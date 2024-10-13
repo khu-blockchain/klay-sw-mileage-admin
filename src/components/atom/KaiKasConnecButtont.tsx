@@ -1,11 +1,10 @@
-import React from 'react';
 import {Button, ButtonProps, Image} from "@chakra-ui/react";
-import KaikasIcon from '@/assets/img/icon_kaikas.png'
+import KaiaIcon from '@/assets/img/icon_Kaia.png'
 import {provider} from "@/App";
-const KaiKasConnectButton = (props: ButtonProps & {setAddress: (value: string) => void}) => {
+const KaiaConnectButton = (props: ButtonProps & {setAddress: (value: string) => void}) => {
   const {setAddress, ...buttonProps} = props;
 
-  const connectKaikas = async() => {
+  const connectKaia = async() => {
     try {
       const result = await provider.enable();
       setAddress(result[0]);
@@ -16,11 +15,11 @@ const KaiKasConnectButton = (props: ButtonProps & {setAddress: (value: string) =
   }
 
   return (
-    <Button onClick={() => connectKaikas()} fontSize={'14px'} borderRadius={'15px'} minW={'280px'} h={'44px'} w={'100%'} color={'#ffffff'} colorScheme={'messenger'} bgColor={'var(--kaikas-color)'} {...buttonProps}>
-      <Image src={KaikasIcon} w={'14px'} mr={'7px'} objectFit={'cover'}/>
-      Connect to Kaikas
+    <Button onClick={() => connectKaia()} fontSize={'14px'} borderRadius={'15px'} minW={'280px'} h={'44px'} w={'100%'} color={'#ffffff'} colorScheme={'messenger'} bgColor={'var(--Kaia-color)'} {...buttonProps}>
+      <Image src={KaiaIcon} w={'14px'} mr={'7px'} objectFit={'cover'}/>
+      Connect to Kaia
     </Button>
   );
 };
 
-export default KaiKasConnectButton;
+export default KaiaConnectButton;
