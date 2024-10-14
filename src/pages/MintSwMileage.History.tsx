@@ -22,7 +22,7 @@ const MintSwMileageHistory = () => {
   })
 
   const onClickTxHash = (txHash: string) => {
-    window.open(`${process.env.REACT_APP_API_KLAYSCOPE_URL}tx/${txHash}`)
+    window.open(``)
   }
 
 

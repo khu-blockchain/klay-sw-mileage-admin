@@ -50,7 +50,6 @@ Global Type으로 선언된 내용들이 작성된 파일이 존재하는 폴더
 ```dotenv
 REACT_APP_SERVER_URL=API 호출에 사용될 서버 요청 경로입니다.
 REACT_APP_API_VERSION=v1/
-REACT_APP_API_KLAYSCOPE_URL=Token Holder 페이지로 이동하기 위한 KlaytnScope URL입니다.
 REACT_APP_API_PROVIDER_END_POINT=Caver를 통한 Node와의 연결을 위한 EndPoint입니다.
 ```
 
