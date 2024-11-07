@@ -1,4 +1,4 @@
-import {Navigate, Outlet, Route, Routes, useNavigate} from "react-router-dom";
+import {Navigate, Outlet, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useToast} from "@chakra-ui/react";
 import SignIn from "@/pages/SignIn";
 import {useEffect, useState} from "react";
@@ -21,12 +21,14 @@ import MintSwMileageHistory from "@/pages/MintSwMileage.History";
 import BurnSwMileageExecute from "@/pages/BurnSwMileage.Execute";
 import BurnSwMileageHistory from "@/pages/BurnSwMileage.History";
 import ManageStudent from "@/pages/ManageStudent";
+import SignUp from "./pages/SignUp";
 
 const RootRouter = () => {
   const navigate = useNavigate()
   const {setAdmin} = useAdminStore((state) => state)
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(true)
+  const location = useLocation();
 
   const {mutate} = useRefresh({
     onSuccessFn: (data) => {
@@ -53,7 +55,6 @@ const RootRouter = () => {
     removeLocalStorageData('admin-refresh-token');
     removeLocalStorageData('admin-refresh-expires');
     setIsLoading(false)
-    navigate('/sign-in');
   }
 
   const hasAccess = async () => {
@@ -85,6 +86,7 @@ const RootRouter = () => {
     <Routes>
       <Route element={<Init/>}>
         <Route path="sign-in" element={<SignIn/>}/>
+        <Route path="sign-up" element={<SignUp/>}/>
       </Route>
       <Route element={<Auth/>}>
         <Route element={<MainLayout/>}>

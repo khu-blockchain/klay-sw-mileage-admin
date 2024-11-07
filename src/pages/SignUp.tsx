@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import InitLayout from "@/components/layout/InitLayout";
 import InitContentBox from "@/components/InitContentBox";
 import {
-  Box,
   FormControl,
   Input,
   InputGroup,
@@ -13,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import useIsAble from "@/hooks/useAble";
 import {useNavigate} from "react-router-dom";
-import md5 from 'md5';
 import BasicLargeButton from "@/components/atom/BasicLargeButton";
 import useAdminStore from "@/store/global/useAdminStore";
 import {TokenType} from "@/store/types";
@@ -21,17 +19,19 @@ import {setLocalStorageData} from "@/utils/webStorage.utils";
 import {useLogin} from "@/feature/queries/auth.queries";
 import {UserRound, LockKeyhole} from 'lucide-react';
 
-const SignIn = () => {
+const SignUp = () => {
   const navigate = useNavigate()
-  const toast = useToast();
+  const toast = useToast()
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
 
   const {setAdmin} = useAdminStore((state) => state)
 
-  const canLogin = useIsAble([
+  const canSignUp = useIsAble([
     id !== '',
-    password !== ''
+    password !== '',
+    confirmPassword !== ''
   ])
 
   const {isPending, mutate} = useLogin({
@@ -51,20 +51,22 @@ const SignIn = () => {
     })
   })
 
-  const onSignIn = () => {
-    mutate({
-      body: { loginType: 'ADMIN', id, password: md5(password) }
-    })
-  }
   const onSignUp = () => {
-    navigate('/sign-up')
+    if(password != confirmPassword) {
+        toast({
+            title: "비밀번호가 일치하지 않습니다. 다시 확인해주세요.",
+            status: 'error',
+            isClosable: true
+        })
+    }
+    //회원가입 api 붙이기
   }
 
   return (
     <InitLayout>
       <InitContentBox
-        title={'로그인'}
-        description={<Text color={'var(--chakra-colors-gray-500)'}>SW 마일리지 관리자 페이지입니다.</Text>}>
+        title={'회원가입'}
+        description={<Text color={'var(--chakra-colors-gray-500)'}>SW 마일리지 회원가입 페이지입니다.</Text>}>
         <VStack align={'center'} w={'100%'} spacing={'20px'}>
           <FormControl>
             <InputGroup>
@@ -92,14 +94,24 @@ const SignIn = () => {
                      type={'password'}/>
             </InputGroup>
           </FormControl>
-          <BasicLargeButton isLoading={isPending} onClick={() => onSignIn()} isDisabled={!canLogin} w={'100%'}>
-            로그인
-          </BasicLargeButton>
-          <BasicLargeButton onClick={()=> onSignUp()} w={'100%'}>회원가입</BasicLargeButton>
+          <FormControl>
+            <InputGroup>
+              <InputLeftElement w={'56px'} h={'56px'} pointerEvents='none'>
+                <LockKeyhole width={'20px'} color={'var(--chakra-colors-gray-400)'}/>
+              </InputLeftElement>
+              <Input variant={'init'}
+                     pl={'48px'}
+                     value={confirmPassword}
+                     onChange={(e) => setConfirmPassword(e.target.value)}
+                     placeholder={'비밀번호를 한번 더 입력해주세요.'}
+                     type={'password'}/>
+            </InputGroup>
+          </FormControl>
+          <BasicLargeButton isLoading={isPending} onClick={()=> onSignUp()} isDisabled={!canSignUp} w={'100%'}>회원가입</BasicLargeButton>
         </VStack>
       </InitContentBox>
     </InitLayout>
   );
 };
 
-export default SignIn;
+export default SignUp;
