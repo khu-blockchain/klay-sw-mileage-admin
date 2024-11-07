@@ -10,8 +10,6 @@ import LoadingBox from "@/components/LoadingBox";
 import MainLayout from "@/components/layout/MainLayout";
 import SwMileageInfo from "@/pages/SwMileageInfo";
 import {useRefresh} from "@/feature/queries/auth.queries";
-import {useGetActivityField} from "@/feature/queries/activityField.queries";
-import {useGetActivateSwMileageToken} from "@/feature/queries/swMileageTokens.queries";
 import SwMileageTokenManage from "@/pages/SwMileageToken.Manage";
 import SwMileageTokenCreate from "@/pages/SwMileageToken.Create";
 import ManageSwMileageList from "@/pages/ManageSwMileage.List";
@@ -55,6 +53,7 @@ const RootRouter = () => {
     removeLocalStorageData('admin-refresh-token');
     removeLocalStorageData('admin-refresh-expires');
     setIsLoading(false)
+    //navigate('sign-in')
   }
 
   const hasAccess = async () => {
@@ -110,7 +109,6 @@ const RootRouter = () => {
           <Route index path={'student'} element={<ManageStudent/>}/>
         </Route>
       </Route>
-
     </Routes>
   );
 };
@@ -127,11 +125,11 @@ const Init = () => {
 }
 
 const Auth = () => {
-  const {getAdmin} = useAdminStore((state) => state)
-  useGetActivityField({});
-  useGetActivateSwMileageToken({})
-  if(getAdmin().admin_id === -1) {
-    return <Navigate to={'/sign-in'}/>
-  }
+  // const {getAdmin} = useAdminStore((state) => state)
+  // useGetActivityField({});
+  // useGetActivateSwMileageToken({})
+  // if(getAdmin().admin_id === -1) {
+  //   return <Navigate to={'/sign-in'}/>
+  // }
   return <Outlet/>
 }

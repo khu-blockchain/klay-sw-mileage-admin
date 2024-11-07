@@ -7,7 +7,7 @@ import LVStack from "@/components/atom/LVStack";
 import {
   AlertDialog, AlertDialogBody, AlertDialogContent,
   AlertDialogFooter,
-  AlertDialogHeader, AlertDialogOverlay, Badge, Button, Flex, Grid, HStack, Text, Tooltip, useDisclosure, useToast
+  AlertDialogHeader, AlertDialogOverlay, Badge, Box, Button, Flex, Grid, HStack, Input, Text, Tooltip, useDisclosure, useToast
 } from "@chakra-ui/react";
 import TokenImage from "@/components/atom/TokenImage";
 import DataField from '@/components/DataField';
@@ -17,6 +17,9 @@ import {PaginationTable} from "@/components/Pagenation";
 import {reduceAddress} from "@/utils/web3.utils";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useQueryClient} from "@tanstack/react-query";
+import BasicInput from '@/components/atom/BasicInput';
+import { Eye, EyeOff } from 'lucide-react';
+import BasicButton from '@/components/atom/BasicButton';
 
 const SwMileageTokenManage = () => {
   const toast = useToast();
@@ -26,6 +29,7 @@ const SwMileageTokenManage = () => {
   const [mileageTokenList, setMileageTokenList] = useState<Array<SwMileageToken>>([])
   const [selectedTokenIdForActivate, setSelectedTokenIdForActivate] = useState<Nullable<SwMileageToken>>(null)
   const {data} = useGetSwMileageTokenList({})
+  const [isShowing, setIsShowing] = useState(false)
 
   const onCopyCA = () => {
     return toast({
@@ -48,6 +52,11 @@ const SwMileageTokenManage = () => {
     }
     setSelectedTokenIdForActivate(token);
     onOpen()
+  }
+
+  const onAddPrivateKey = () => {
+    console.log('지갑을 넣었습니다.');
+    
   }
 
   useEffect(() => {
@@ -101,7 +110,6 @@ const SwMileageTokenManage = () => {
       label: '상태'
     },
   ]
-
   return (
     <>
       {(selectedTokenIdForActivate && isOpen) &&
@@ -154,6 +162,20 @@ const SwMileageTokenManage = () => {
               </Grid>
             </LVStack>
           }
+        </FormWrapper>
+        <FormWrapper title={'지갑 추가'} description={'비밀키 분실 시 사용할 예비 지갑 주소를 추가합니다.'}>
+          <Box>
+            <Box position={'relative'}>
+            <BasicInput w={'500px'} placeholder='비밀키를 붙여넣으세요.' type={isShowing ? 'text':'password'}/>
+            {!isShowing ? (
+              <Box position={'absolute'} top={'12px'} right={'10px'} zIndex={1000} onClick={() => setIsShowing(true)}><Eye width={'24px'} color={'var(--chakra-colors-gray-400)'}/></Box>
+              ) : (
+              <Box position={'absolute'} top={'12px'} right={'10px'} zIndex={1000} onClick={() => setIsShowing(false)}><EyeOff width={'24px'} color={'var(--chakra-colors-gray-400)'}/></Box>
+              )
+            }
+            </Box>
+            <BasicButton mt={'15px'} w={'100px'} onClick={onAddPrivateKey}>추가하기</BasicButton>
+          </Box>
         </FormWrapper>
         <FormWrapper
           title={'토큰 목록'}
