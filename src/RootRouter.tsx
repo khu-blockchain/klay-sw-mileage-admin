@@ -20,6 +20,7 @@ import BurnSwMileageExecute from "@/pages/BurnSwMileage.Execute";
 import BurnSwMileageHistory from "@/pages/BurnSwMileage.History";
 import ManageStudent from "@/pages/ManageStudent";
 import SignUp from "./pages/SignUp";
+import Rank from "./pages/Rank";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -107,6 +108,7 @@ const RootRouter = () => {
             <Route path={'history'} element={<BurnSwMileageHistory/>}/>
           </Route>
           <Route index path={'student'} element={<ManageStudent/>}/>
+          <Route path={"rank"} element={<Rank/>}/>
         </Route>
       </Route>
     </Routes>

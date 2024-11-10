@@ -30,6 +30,9 @@ const Header = () => {
         if(subRoot === 'execute') return '토큰 회수'
         else return '토큰 회수 내역'
       }
+      case 'rank': {
+          return '마일리지 랭킹'
+      }
       default :
         return ''
     }

@@ -92,5 +92,11 @@ export const MENU: Array<Menu> = [
       },
     ],
   },
-
+  {
+    id: 7,
+    name: "마일리지 랭킹",
+    root: "rank",
+    icon: Flame,
+    subMenu: []
+  }
 ]
