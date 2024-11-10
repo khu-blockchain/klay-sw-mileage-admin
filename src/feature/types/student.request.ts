@@ -1,3 +1,16 @@
+type signUp = {
+  body: {
+    password: string;
+    passwordConfirm: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    department: string;
+    walletAddress: string;
+    personalInformationConsentStatus: number
+  }
+}
+
 type getStudentInfoById = {
   params: {studentId: string}
 }
@@ -14,5 +27,5 @@ type updateStudentInfo = {
 export type {
   getStudentInfoById as getStudentInfoByIdRequest,
   updateStudentInfo as updateStudentInfoRequest,
-
+  signUp as signUpRequest
 }
