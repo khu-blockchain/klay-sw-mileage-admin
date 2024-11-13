@@ -1,7 +1,19 @@
-import {StudentServer} from "@/feature/serverInstance";
+import {StudentServer, updateAuthorization, UserServer} from "@/feature/serverInstance";
 import {API} from "@/feature";
-import {getStudentInfoByIdRequest, updateStudentInfoRequest} from "@/feature/types/student.request";
+import {getStudentInfoByIdRequest, signUpRequest, updateStudentInfoRequest} from "@/feature/types/student.request";
 import {getStudentInfoByIdResponse, updateStudentInfoResponse} from "@/feature/types/student.response";
+
+
+const signUp: API<signUpRequest, any> = async(request) => {
+  try {
+    const result = await UserServer.post('', request.body)
+    const {data} : {data: any} = result
+    console.log(data);
+    return data;
+  } catch(e) {
+    throw e
+  }
+}
 
 const getStudentInfoById: API<getStudentInfoByIdRequest, getStudentInfoByIdResponse> = async(request) => {
   try{
@@ -22,6 +34,7 @@ const updateStudentInfo: API<updateStudentInfoRequest, updateStudentInfoResponse
 }
 
 export {
+  signUp as signUpAPI,
   getStudentInfoById as getStudentInfoByIdAPI,
   updateStudentInfo as updateStudentInfoAPI
 }

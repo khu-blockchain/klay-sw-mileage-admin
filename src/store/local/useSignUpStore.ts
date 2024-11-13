@@ -2,32 +2,28 @@ import {create} from "zustand";
 
 interface SignUpState {
   state: {
-    studentId: string;
+    adminId: string;
     password: string;
-    confirmPassword: string;
+    passwordConfirm: string;
     name: string;
     email: string;
     phoneNumber: string;
     department: string;
     walletAddress: string;
-    bankAccountNumber: string;
-    bankCode: string;
   }
   setState: (field: keyof SignUpState["state"], value: string) => void;
   reset: () => void
 }
 
 const initialState = {
-  studentId: '',
+  adminId: '',
   password: '',
-  confirmPassword: '',
+  passwordConfirm: '',
   name: '',
   email: '',
   phoneNumber: '',
   department: '',
   walletAddress: '',
-  bankAccountNumber: '',
-  bankCode: '',
 };
 
 const useSignUpStore = create<SignUpState>((set) => ({

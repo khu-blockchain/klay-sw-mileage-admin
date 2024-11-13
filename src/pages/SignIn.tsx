@@ -20,7 +20,6 @@ import {TokenType} from "@/store/types";
 import {setLocalStorageData} from "@/utils/webStorage.utils";
 import {useLogin} from "@/feature/queries/auth.queries";
 import {UserRound, LockKeyhole} from 'lucide-react';
-import { log } from 'console';
 
 const SignIn = () => {
   const navigate = useNavigate()

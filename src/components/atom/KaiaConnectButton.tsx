@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, ButtonProps, Image} from "@chakra-ui/react";
 import KaiaIcon from '@/assets/img/icon_kaia.png'
 import {provider} from "@/App";
+import { log } from 'console';
 const KaiaConnectButton = (props: ButtonProps & {setAddress: (value: string) => void}) => {
   const {setAddress, ...buttonProps} = props;
 
@@ -9,6 +10,7 @@ const KaiaConnectButton = (props: ButtonProps & {setAddress: (value: string) => 
     try {
       const result = await provider.enable();
       setAddress(result[0]);
+      
     } catch (error) {
       // Handle error. Likely the user rejected the login
       console.error(error);

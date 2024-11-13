@@ -19,7 +19,7 @@ import KaiaConnectButton from "@/components/atom/KaiaConnectButton";
 import md5 from "md5";
 import {useNavigate} from "react-router-dom";
 import {caver} from "@/App";
-import {useSignUp} from "@/feature/queries/student.queries";
+import {useSignUp} from "@/feature/queries/user.queries";
 import LVStack from "@/components/atom/LVStack";
 import {UserRound, EyeOff, Eye} from "lucide-react";
 
@@ -68,18 +68,18 @@ const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
 
   const canNext = useIsAble([
-    state.email !== '',
+    state.adminId !== '',
     state.password !== '',
-    state.confirmPassword !== '',
-    state.confirmPassword === state.password
+    state.passwordConfirm !== '',
+    state.passwordConfirm === state.password
   ])
   return (
     <VStack align={'center'} w={'100%'} spacing={'24px'}>
       <FormControl>
         <Input variant={'init'}
-               value={state.email}
-               onChange={(e) => setState('email', e.target.value)}
-               placeholder={'이메일을 입력해주세요.'}
+               value={state.adminId}
+               onChange={(e) => setState('adminId', e.target.value)}
+               placeholder={'아이디를 입력해주세요.'}
                type={'text'}/>
       </FormControl>
       <FormControl>
@@ -100,8 +100,8 @@ const Step0 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
       <FormControl>
         <InputGroup>
           <Input variant={'init'}
-                 value={state.confirmPassword}
-                 onChange={(e) => setState('confirmPassword', e.target.value)}
+                 value={state.passwordConfirm}
+                 onChange={(e) => setState('passwordConfirm', e.target.value)}
                  placeholder={'동일한 비밀번호를 입력해주세요.'}
                  type={confirmPasswordShow ? 'text' : 'password'}/>
           <InputRightElement w={'56px'} h={'56px'}>
@@ -143,6 +143,13 @@ const Step1 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
       </FormControl>
       <FormControl>
         <Input variant={'init'}
+               value={state.email}
+               onChange={(e) => setState('email', e.target.value)}
+               placeholder={'이메일을 입력해주세요.'}
+               type={'email'}/>
+      </FormControl>
+      <FormControl>
+        <Input variant={'init'}
                value={state.phoneNumber}
                onChange={(e) => setState('phoneNumber', e.target.value)}
                placeholder={'010-000-0000'}
@@ -181,6 +188,7 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
     caver.utils.isAddress(state.walletAddress),
     isTermChecked
   ])
+  
 
   const {mutate, isPending} = useSignUp({
     onSuccessFn: (data) => {
@@ -202,16 +210,17 @@ const Step2 = ({setStep}: {setStep: Dispatch<SetStateAction<number>>}) => {
   })
 
   const onSignUp = async () => {
+    
     await mutate({
       body: {
-        password                        : md5(state.password),
-        passwordConfirm                 : md5(state.confirmPassword),
+        adminId                         : state.adminId,
+        password                        : state.password,
+        passwordConfirm                 : state.passwordConfirm,
         name                            : state.name,
         email                           : state.email,
         phoneNumber                     : state.phoneNumber,
         department                      : state.department,
         walletAddress                   : state.walletAddress,
-        personalInformationConsentStatus: isTermChecked ? 1 : 0
       }
     })
   }

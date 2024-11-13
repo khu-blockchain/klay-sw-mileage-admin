@@ -98,5 +98,12 @@ export const MENU: Array<Menu> = [
     root: "rank",
     icon: Flame,
     subMenu: []
+  },
+  {
+    id: 8,
+    name: '개인정보 수정',
+    root: "info",
+    icon: UserSearch,
+    subMenu: []
   }
 ]

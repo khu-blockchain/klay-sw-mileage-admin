@@ -6,7 +6,7 @@ import LVStack from "@/components/atom/LVStack";
 import {Button, Divider, Flex, Grid, HStack, Text, useToast} from "@chakra-ui/react";
 import BasicInput from "@/components/atom/BasicInput";
 import BasicButton from "@/components/atom/BasicButton";
-import {useGetStudentInfo, useUpdateStudentInfo} from "@/feature/queries/student.queries";
+import {useGetStudentInfo, useUpdateStudentInfo} from "@/feature/queries/user.queries";
 import DataField from "@/components/DataField";
 import {AxiosError} from "axios";
 import {useQueryClient} from "@tanstack/react-query";

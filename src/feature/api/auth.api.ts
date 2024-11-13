@@ -2,7 +2,6 @@ import {API} from "@/feature";
 import {AuthServer, updateAuthorization} from "@/feature/serverInstance";
 import {loginRequest, refreshRequest} from "@/feature/types/auth.request";
 import {loginResponse, refreshResponse} from "@/feature/types/auth.response";
-import { log } from "console";
 
 const login: API<loginRequest, loginResponse> = async(request) => {
   try{

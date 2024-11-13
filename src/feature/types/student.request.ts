@@ -1,5 +1,6 @@
 type signUp = {
   body: {
+    adminId: string
     password: string;
     passwordConfirm: string;
     name: string;
@@ -7,7 +8,7 @@ type signUp = {
     phoneNumber: string;
     department: string;
     walletAddress: string;
-    personalInformationConsentStatus: number
+    personalInformationConsentStatus?: number
   }
 }
 
