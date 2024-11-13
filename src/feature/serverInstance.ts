@@ -1,6 +1,7 @@
 import axios, {AxiosInstance} from "axios";
 
 const baseURL = `${process.env.REACT_APP_SERVER_URL}${process.env.REACT_APP_API_VERSION}`
+console.log(baseURL);
 
 const StudentServer = axios.create({baseURL: `${baseURL}students`})
 const AuthServer = axios.create({baseURL: `${baseURL}auth`})

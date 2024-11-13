@@ -20,6 +20,7 @@ import {TokenType} from "@/store/types";
 import {setLocalStorageData} from "@/utils/webStorage.utils";
 import {useLogin} from "@/feature/queries/auth.queries";
 import {UserRound, LockKeyhole} from 'lucide-react';
+import { log } from 'console';
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -51,11 +52,16 @@ const SignIn = () => {
     })
   })
 
-  const onSignIn = () => {
-    mutate({
-      body: { loginType: 'ADMIN', id, password: md5(password) }
+  const onSignIn = async () => {
+    console.log(id, password);
+    console.log(md5(password));
+    
+    await mutate({
+      body: {loginType: 'ADMIN', id, password: password}
+
     })
   }
+
   const onSignUp = () => {
     navigate('/sign-up')
   }

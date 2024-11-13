@@ -21,6 +21,8 @@ import BurnSwMileageHistory from "@/pages/BurnSwMileage.History";
 import ManageStudent from "@/pages/ManageStudent";
 import SignUp from "./pages/SignUp";
 import Rank from "./pages/Rank";
+import { useGetActivityField } from "./feature/queries/activityField.queries";
+import { useGetActivateSwMileageToken } from "./feature/queries/swMileageTokens.queries";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -54,7 +56,7 @@ const RootRouter = () => {
     removeLocalStorageData('admin-refresh-token');
     removeLocalStorageData('admin-refresh-expires');
     setIsLoading(false)
-    //navigate('sign-in')
+    navigate('sign-in')
   }
 
   const hasAccess = async () => {
@@ -127,11 +129,11 @@ const Init = () => {
 }
 
 const Auth = () => {
-  // const {getAdmin} = useAdminStore((state) => state)
-  // useGetActivityField({});
-  // useGetActivateSwMileageToken({})
-  // if(getAdmin().admin_id === -1) {
-  //   return <Navigate to={'/sign-in'}/>
-  // }
+  const {getAdmin} = useAdminStore((state) => state)
+  useGetActivityField({});
+  useGetActivateSwMileageToken({})
+  if(getAdmin().admin_id === -1) {
+    return <Navigate to={'/sign-in'}/>
+  }
   return <Outlet/>
 }
