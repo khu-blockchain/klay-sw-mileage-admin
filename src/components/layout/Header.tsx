@@ -33,6 +33,9 @@ const Header = () => {
       case 'rank': {
           return '마일리지 랭킹'
       }
+      case 'info': {
+        return '개인정보 수정' 
+      }
       default :
         return ''
     }

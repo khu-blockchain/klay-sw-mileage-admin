@@ -23,6 +23,7 @@ import SignUp from "./pages/SignUp";
 import Rank from "./pages/Rank";
 import { useGetActivityField } from "./feature/queries/activityField.queries";
 import { useGetActivateSwMileageToken } from "./feature/queries/swMileageTokens.queries";
+import Info from "./pages/Info";
 
 const RootRouter = () => {
   const navigate = useNavigate()
@@ -111,6 +112,7 @@ const RootRouter = () => {
           </Route>
           <Route index path={'student'} element={<ManageStudent/>}/>
           <Route path={"rank"} element={<Rank/>}/>
+          <Route path={"info"} element={<Info/>}/>
         </Route>
       </Route>
     </Routes>
