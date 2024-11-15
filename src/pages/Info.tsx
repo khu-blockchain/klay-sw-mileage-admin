@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Wrapper from "@/components/Wrapper";
 import LVStack from "@/components/atom/LVStack";
 import {
@@ -8,14 +8,29 @@ import FormWrapper from "@/components/FormWrapper";
 import BasicInput from '@/components/atom/BasicInput';
 import { Eye, EyeOff } from 'lucide-react';
 import BasicButton from '@/components/atom/BasicButton';
+import { useGetAdminInfo } from '@/feature/queries/info.queries';
+import useAdminStore from '@/store/global/useAdminStore';
 
 const Info = () => {
     const [isShowing, setIsShowing] = useState(false)
     const onChangeWalletAddress = () => {
         console.log('지갑주소를 변경했습니다.');
-        
     }
+    const {getAdmin} = useAdminStore((state) => state)
+    const adminId = getAdmin().admin_id
+
+    const {mutate} = useGetAdminInfo({
+      onSuccessFn: (data) => {
+        // store에 저장
+        return;
+      },
+      onErrorFn  : (error: any) => console.log('getAdminInfo error')
+    })
     
+    useEffect(() => {
+      mutate(adminId)
+    },[adminId])
+
   return (
     <LVStack w={'100%'} spacing={'20px'}>
       <Wrapper>
