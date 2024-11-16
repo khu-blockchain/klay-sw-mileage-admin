@@ -5,6 +5,7 @@ type adminInfo = {
     email: string
     phone_number: string
     role: number
+    department: string
 }
 
 export type {

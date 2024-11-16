@@ -3,12 +3,15 @@ import Wrapper from "@/components/Wrapper";
 import LVStack from "@/components/atom/LVStack";
 import {
     Box,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
 } from "@chakra-ui/react";
 import FormWrapper from "@/components/FormWrapper";
 import BasicInput from '@/components/atom/BasicInput';
 import { Eye, EyeOff } from 'lucide-react';
 import BasicButton from '@/components/atom/BasicButton';
-import { useGetAdminInfo } from '@/feature/queries/info.queries';
 import useAdminStore from '@/store/global/useAdminStore';
 
 const Info = () => {
@@ -17,20 +20,9 @@ const Info = () => {
         console.log('지갑주소를 변경했습니다.');
     }
     const {getAdmin} = useAdminStore((state) => state)
-    const adminId = getAdmin().admin_id
-
-    const {mutate} = useGetAdminInfo({
-      onSuccessFn: (data) => {
-        // store에 저장
-        return;
-      },
-      onErrorFn  : (error: any) => console.log('getAdminInfo error')
-    })
+    const {admin_id, name, email, department, phone_number} = getAdmin()
     
-    useEffect(() => {
-      mutate(adminId)
-    },[adminId])
-
+    
   return (
     <LVStack w={'100%'} spacing={'20px'}>
       <Wrapper>
@@ -39,7 +31,54 @@ const Info = () => {
             title={'내 정보'}
             description='개인정보를 조회, 수정할 수 있습니다.'
           >
-            <></>
+            <Box>
+              <Box>아이디: {admin_id}</Box>
+            </Box>
+            <FormControl>
+            <InputGroup  w={'700px'}>
+            <Box>
+              <FormLabel>이메일</FormLabel>
+              <Input variant={'init'}
+                     value={email}
+                     w={'500px'}
+                     onChange={(e) => {}}
+                     disabled={true}
+                     type={'text'}/>
+              </Box>
+              <BasicButton alignSelf={'end'} mb={'5px'} w={'70px'} h={'50px'} ml={'10px'}
+              >변경</BasicButton>
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+          <InputGroup flexDir={'column'}>
+          <FormLabel>부서</FormLabel>
+              <Input variant={'init'}
+                     w={'500px'}
+                     value={department}
+                     onChange={(e) => {}}
+                     type={'text'}/>
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+          <InputGroup flexDir={'column'}>
+          <FormLabel>이름</FormLabel>
+              <Input variant={'init'}
+                     w={'500px'}
+                     value={name}
+                     onChange={(e) => {}}
+                     type={'text'}/>
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+          <InputGroup flexDir={'column'}>
+          <FormLabel>전화번호</FormLabel>
+              <Input variant={'init'}
+                     w={'500px'}
+                     value={phone_number}
+                     onChange={(e) => {}}
+                     type={'text'}/>
+            </InputGroup>
+          </FormControl>
           </FormWrapper>
           <FormWrapper title={'지갑주소 변경'} description={'비밀키 분실 시 사용할 새로운 지갑 주소를 입력하세요.'}>
           <Box>

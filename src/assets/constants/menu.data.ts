@@ -1,4 +1,4 @@
-import {Info,Coins,List, HandCoins,Flame, UserSearch, LucideIcon} from 'lucide-react';
+import {Info,Coins,List, HandCoins,Flame, UserSearch, LucideIcon, Contact, Crown} from 'lucide-react';
 
 export type Menu = {
   // id는 1부터 시작하여 증가
@@ -96,14 +96,14 @@ export const MENU: Array<Menu> = [
     id: 7,
     name: "마일리지 랭킹",
     root: "rank",
-    icon: Flame,
+    icon: Crown,
     subMenu: []
   },
   {
     id: 8,
     name: '개인정보 수정',
     root: "info",
-    icon: UserSearch,
+    icon: Contact,
     subMenu: []
   }
 ]

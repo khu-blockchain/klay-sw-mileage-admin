@@ -1,4 +1,3 @@
-
 type JWT = [AccessToken, RefreshToken]
 
 type AccessToken = Token; // 0
@@ -21,6 +20,9 @@ type Admin = {
   name: string;
   wallet_address: string;
   role: number
+  email: string;
+  phone_number: string;
+  department: string;
 }
 
 type AdminWithToken = {

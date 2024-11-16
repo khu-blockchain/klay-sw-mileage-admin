@@ -5,9 +5,7 @@ import {loginResponse, refreshResponse} from "@/feature/types/auth.response";
 
 const login: API<loginRequest, loginResponse> = async(request) => {
   try{
-    const result = await AuthServer.post(`/login`, request.body)
-    console.log(result);
-    
+    const result = await AuthServer.post(`/login`, request.body)  
     const {data}: {data: loginResponse} = result
     updateAuthorization(data.tokens[0].token)
     return data;

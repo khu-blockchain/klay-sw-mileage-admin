@@ -14,6 +14,9 @@ const initialStudentState = {
   name: '',
   wallet_address: '',
   role: -1,
+  email: '',
+  phone_number: '',
+  department: ''
 }
 
 const initialTokenState: JWT = [
