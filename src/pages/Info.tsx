@@ -7,6 +7,8 @@ import {
     FormLabel,
     Input,
     InputGroup,
+    Toast,
+    useToast,
 } from "@chakra-ui/react";
 import FormWrapper from "@/components/FormWrapper";
 import BasicInput from '@/components/atom/BasicInput';
@@ -16,12 +18,38 @@ import useAdminStore from '@/store/global/useAdminStore';
 
 const Info = () => {
     const [isShowing, setIsShowing] = useState(false)
-    const onChangeWalletAddress = () => {
-        console.log('지갑주소를 변경했습니다.');
-    }
+    const toast = useToast()
     const {getAdmin} = useAdminStore((state) => state)
     const {admin_id, name, email, department, phone_number} = getAdmin()
-    
+    const [isDisabled, setIsDisabled] = useState(true)
+    const [form, setForm] = useState({
+      email, department, name, phone_number
+    })
+    const onChangeWalletAddress = () => {
+      console.log('지갑주소를 변경했습니다.');
+  }
+
+    const handleChange = (e: any) => {
+      const {id, value} = e.target;
+      setForm((prev) => ({
+        ...prev,
+        [id]: value
+      }))
+    }
+
+    const handleSaveChange = () => {
+      if(isDisabled) {
+        setIsDisabled(false)
+      } else {
+        toast({
+          title     : `변경사항이 저장되었습니다.`,
+          status    : 'success',
+          isClosable: true,
+          position  : "top",
+        })
+        setIsDisabled(true)
+      }
+    }
     
   return (
     <LVStack w={'100%'} spacing={'20px'}>
@@ -35,18 +63,15 @@ const Info = () => {
               <Box>아이디: {admin_id}</Box>
             </Box>
             <FormControl>
-            <InputGroup  w={'700px'}>
-            <Box>
+            <InputGroup  w={'700px'} flexDir={'column'}>
               <FormLabel>이메일</FormLabel>
               <Input variant={'init'}
-                     value={email}
+                     value={form.email}
                      w={'500px'}
-                     onChange={(e) => {}}
-                     disabled={true}
+                     onChange={handleChange}
+                     disabled={isDisabled}
+                     id='email'
                      type={'text'}/>
-              </Box>
-              <BasicButton alignSelf={'end'} mb={'5px'} w={'70px'} h={'50px'} ml={'10px'}
-              >변경</BasicButton>
             </InputGroup>
           </FormControl>
           <FormControl>
@@ -54,8 +79,10 @@ const Info = () => {
           <FormLabel>부서</FormLabel>
               <Input variant={'init'}
                      w={'500px'}
-                     value={department}
-                     onChange={(e) => {}}
+                     value={form.department}
+                     onChange={handleChange}
+                     disabled={isDisabled}
+                     id="department"
                      type={'text'}/>
             </InputGroup>
           </FormControl>
@@ -64,8 +91,10 @@ const Info = () => {
           <FormLabel>이름</FormLabel>
               <Input variant={'init'}
                      w={'500px'}
-                     value={name}
-                     onChange={(e) => {}}
+                     value={form.name}
+                     onChange={handleChange}
+                     disabled={isDisabled}
+                     id='name'
                      type={'text'}/>
             </InputGroup>
           </FormControl>
@@ -74,11 +103,14 @@ const Info = () => {
           <FormLabel>전화번호</FormLabel>
               <Input variant={'init'}
                      w={'500px'}
-                     value={phone_number}
-                     onChange={(e) => {}}
+                     value={form.phone_number}
+                     disabled={isDisabled}
+                     onChange={handleChange}
+                     id='phone_number'
                      type={'text'}/>
             </InputGroup>
           </FormControl>
+          <BasicButton onClick={handleSaveChange}>{isDisabled ? "변경하기" : "저장하기"}</BasicButton>
           </FormWrapper>
           <FormWrapper title={'지갑주소 변경'} description={'비밀키 분실 시 사용할 새로운 지갑 주소를 입력하세요.'}>
           <Box>
