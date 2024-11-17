@@ -8,7 +8,6 @@ import {
     FormLabel,
     Input,
     InputGroup,
-    Toast,
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
@@ -30,6 +29,7 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 import { removeLocalStorageData } from '@/utils/webStorage.utils';
+import { useQueryClient } from '@tanstack/react-query';
 
 const Info = () => {
     const [isNewAddrShowing, setIsNewAddrShowing] = useState(false)
@@ -43,7 +43,8 @@ const Info = () => {
     })
     const [walletAddress, setWalletAddress] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
     const {mutate:updateAdminInfo} = useUpdateAdminInfo({
       onSuccessFn: () => {
         toast({
@@ -94,8 +95,10 @@ const Info = () => {
       } else {
         try {
           await updateAdminInfo({
-            body: {...form, adminId: admin_id}
+            id: getAdmin().admin_id,
+            body: {...form}
           })
+          queryClient.invalidateQueries()
         } catch(e) {
           throw e
         }
@@ -109,8 +112,10 @@ const Info = () => {
         //api요청
         try {
           await updateAdminInfo({
-            body: {walletAddress, adminId: admin_id}
+            id: getAdmin().admin_id,
+            body: {walletAddress}
           })
+          queryClient.invalidateQueries()
         } catch(e) {
           throw e
         }

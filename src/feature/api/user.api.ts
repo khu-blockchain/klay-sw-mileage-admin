@@ -3,7 +3,6 @@ import {API} from "@/feature";
 import {getStudentInfoByIdRequest, signUpRequest, updateStudentInfoRequest} from "@/feature/types/student.request";
 import {getStudentInfoByIdResponse, updateStudentInfoResponse} from "@/feature/types/student.response";
 
-
 const signUp: API<signUpRequest, any> = async(request) => {
   try {
     const result = await UserServer.post('', request.body)
@@ -16,7 +15,7 @@ const signUp: API<signUpRequest, any> = async(request) => {
 }
 
 const updateAdminInfo: API<any, any> = async(request) => {
-  const {adminId} = request.body
+  const adminId = request.id
   try {
     const result = await UserServer.put(`${adminId}`,request.body)
     const {data} : {data:any} = result
@@ -27,7 +26,7 @@ const updateAdminInfo: API<any, any> = async(request) => {
 }
 
 const deleteAdmin: API<any,any> = async(request) => {
-  const {adminId} = request.body
+  const adminId = request.id
   try {
     const result = await UserServer.delete(`${adminId}`)
     const {data} : {data:any} = result
