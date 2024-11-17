@@ -26,6 +26,17 @@ const updateAdminInfo: API<any, any> = async(request) => {
   }
 }
 
+const deleteAdmin: API<any,any> = async(request) => {
+  const {adminId} = request.body
+  try {
+    const result = await UserServer.delete(`${adminId}`)
+    const {data} : {data:any} = result
+    return data
+  } catch(e) {
+    throw e
+  }
+}
+
 const getStudentInfoById: API<getStudentInfoByIdRequest, getStudentInfoByIdResponse> = async(request) => {
   try{
     const result = await StudentServer.get(`/${request.params.studentId}`)
@@ -48,5 +59,6 @@ export {
   signUp as signUpAPI,
   getStudentInfoById as getStudentInfoByIdAPI,
   updateStudentInfo as updateStudentInfoAPI,
-  updateAdminInfo as updateAdminInfoAPI
+  updateAdminInfo as updateAdminInfoAPI,
+  deleteAdmin as deleteAdminAPI
 }

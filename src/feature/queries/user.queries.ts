@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {updateStudentInfoRequest, signUpRequest} from "@/feature/types/student.request";
-import {getStudentInfoByIdAPI, signUpAPI, updateAdminInfoAPI, updateStudentInfoAPI} from "@/feature/api/user.api";
+import {deleteAdminAPI, getStudentInfoByIdAPI, signUpAPI, updateAdminInfoAPI, updateStudentInfoAPI} from "@/feature/api/user.api";
 import {Mutation, Query} from "@/feature";
 import {getStudentInfoByIdResponse, updateStudentInfoResponse} from "@/feature/types/student.response";
 
@@ -20,6 +20,17 @@ const useUpdateAdminInfo: Mutation<any, any> = (args) => {
   return useMutation({
     mutationFn: async(data) => {
       return await updateAdminInfoAPI(data)
+    },
+    ...(onSuccessFn && {onSuccess: (res: any) => onSuccessFn(res)}),
+    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
+  })
+}
+
+const useDeleteAdmin: Mutation<any,any> = (args) => {
+  const {onSuccessFn, onErrorFn} = args
+  return useMutation({
+    mutationFn: async(data) => {
+      return await deleteAdminAPI(data)
     },
     ...(onSuccessFn && {onSuccess: (res: any) => onSuccessFn(res)}),
     ...(onErrorFn && {onError: (res) => onErrorFn(res)})
@@ -53,5 +64,6 @@ export {
   useSignUp,
   useGetStudentInfo,
   useUpdateStudentInfo,
-  useUpdateAdminInfo
+  useUpdateAdminInfo,
+  useDeleteAdmin
 }
