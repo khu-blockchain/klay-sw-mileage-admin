@@ -15,6 +15,17 @@ const signUp: API<signUpRequest, any> = async(request) => {
   }
 }
 
+const updateAdminInfo: API<any, any> = async(request) => {
+  const {adminId} = request.body
+  try {
+    const result = await UserServer.put(`${adminId}`,request.body)
+    const {data} : {data:any} = result
+    return data
+  } catch(e) {
+    throw e
+  }
+}
+
 const getStudentInfoById: API<getStudentInfoByIdRequest, getStudentInfoByIdResponse> = async(request) => {
   try{
     const result = await StudentServer.get(`/${request.params.studentId}`)
@@ -36,5 +47,6 @@ const updateStudentInfo: API<updateStudentInfoRequest, updateStudentInfoResponse
 export {
   signUp as signUpAPI,
   getStudentInfoById as getStudentInfoByIdAPI,
-  updateStudentInfo as updateStudentInfoAPI
+  updateStudentInfo as updateStudentInfoAPI,
+  updateAdminInfo as updateAdminInfoAPI
 }

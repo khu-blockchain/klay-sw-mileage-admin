@@ -16,6 +16,7 @@ const setAuthorizationToInstanceHeader = (server: AxiosInstance, token: string) 
 }
 
 const updateAuthorization = (token: string) => {
+  setAuthorizationToInstanceHeader(UserServer, token)
   setAuthorizationToInstanceHeader(StudentServer, token)
   setAuthorizationToInstanceHeader(SwMileageServer, token)
   setAuthorizationToInstanceHeader(SwMileageTokenServer, token)

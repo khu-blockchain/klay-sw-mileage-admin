@@ -15,6 +15,7 @@ import BasicInput from '@/components/atom/BasicInput';
 import { Eye, EyeOff } from 'lucide-react';
 import BasicButton from '@/components/atom/BasicButton';
 import useAdminStore from '@/store/global/useAdminStore';
+import { useUpdateAdminInfo } from '@/feature/queries/user.queries';
 
 const Info = () => {
     const [isShowing, setIsShowing] = useState(false)
@@ -28,6 +29,22 @@ const Info = () => {
     const onChangeWalletAddress = () => {
       console.log('지갑주소를 변경했습니다.');
   }
+  const {mutate} = useUpdateAdminInfo({
+    onSuccessFn: () => {
+      toast({
+        title     : `변경사항이 저장되었습니다.`,
+        status    : 'success',
+        isClosable: true,
+        position  : "top",
+      })
+    },
+    onErrorFn  : (error: any) => toast({
+      title: "변경사항을 저장하지 못했습니다.",
+      status: 'error',
+      isClosable: true,
+      position: "top"
+    })
+})
 
     const handleChange = (e: any) => {
       const {id, value} = e.target;
@@ -37,16 +54,17 @@ const Info = () => {
       }))
     }
 
-    const handleSaveChange = () => {
+    const handleSaveChange = async () => {
       if(isDisabled) {
         setIsDisabled(false)
       } else {
-        toast({
-          title     : `변경사항이 저장되었습니다.`,
-          status    : 'success',
-          isClosable: true,
-          position  : "top",
-        })
+        try {
+          await mutate({
+            body: {...form, adminId: admin_id}
+          })
+        } catch(e) {
+          throw e
+        }
         setIsDisabled(true)
       }
     }
@@ -123,7 +141,7 @@ const Info = () => {
               )
             }
             </Box>
-            <BasicButton mt={'25px'} w={'100px'} onClick={onChangeWalletAddress}>변경하기</BasicButton>
+            <BasicButton mt={'25px'} onClick={onChangeWalletAddress}>변경하기</BasicButton>
           </Box>
         </FormWrapper>
         <FormWrapper title={'회원 탈퇴'} description={'계정을 삭제합니다.'}>

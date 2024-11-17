@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {updateStudentInfoRequest, signUpRequest} from "@/feature/types/student.request";
-import {getStudentInfoByIdAPI, signUpAPI, updateStudentInfoAPI} from "@/feature/api/user.api";
+import {getStudentInfoByIdAPI, signUpAPI, updateAdminInfoAPI, updateStudentInfoAPI} from "@/feature/api/user.api";
 import {Mutation, Query} from "@/feature";
 import {getStudentInfoByIdResponse, updateStudentInfoResponse} from "@/feature/types/student.response";
 
@@ -15,6 +15,16 @@ const useSignUp: Mutation<signUpRequest, any> = (args) => {
   })
 }
 
+const useUpdateAdminInfo: Mutation<any, any> = (args) => {
+  const {onSuccessFn, onErrorFn} = args
+  return useMutation({
+    mutationFn: async(data) => {
+      return await updateAdminInfoAPI(data)
+    },
+    ...(onSuccessFn && {onSuccess: (res: any) => onSuccessFn(res)}),
+    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
+  })
+}
 
 const useGetStudentInfo: Query<string, getStudentInfoByIdResponse> = (studentId) => {
   return useQuery({
@@ -42,5 +52,6 @@ const useUpdateStudentInfo: Mutation<updateStudentInfoRequest, updateStudentInfo
 export {
   useSignUp,
   useGetStudentInfo,
-  useUpdateStudentInfo
+  useUpdateStudentInfo,
+  useUpdateAdminInfo
 }
