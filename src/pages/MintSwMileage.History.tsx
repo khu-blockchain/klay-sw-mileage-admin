@@ -27,18 +27,25 @@ const MintSwMileageHistory = () => {
 
 
   const mintHistories = (list: Array<SwMileageTokenHistory>) => {
-    return list.map(el => {
-      return {
-        status          : <TransactionStatusLabel status={el.status}/>,
-        amount          : <Text fontSize={'14px'}>{el.amount}</Text>,
-        admin_address   : <Text fontSize={'14px'}>{reduceAddress(el.admin_address)}</Text>,
-        student_address : <Text fontSize={'14px'}>{reduceAddress(el.student_address)}</Text>,
-        student_id      : <Text fontSize={'14px'}>{el.student_id}</Text>,
-        transaction_hash: <Button fontSize={'14px'} variant={'link'}
-                                  onClick={() => onClickTxHash(el.transaction_hash)}>{reduceAddress(el.transaction_hash)}</Button>,
-        created_at      : <Text fontSize={'14px'}>{parseToFormattedDate(el.created_at)}</Text>,
-      }
-    })
+    if(list.length < 1){
+      console.log('no list');
+      return []
+    } else {
+      console.log(list);
+      
+      return list.map(el => {
+        return {
+          status          : <TransactionStatusLabel status={el.status}/>,
+          amount          : <Text fontSize={'14px'}>{el.amount}</Text>,
+          admin_address   : <Text fontSize={'14px'}>{el.admin_address}</Text>,
+          student_address : <Text fontSize={'14px'}>{el.student_address}</Text>,
+          student_id      : <Text fontSize={'14px'}>{el.student_id}</Text>,
+          transaction_hash: <Button fontSize={'14px'} variant={'link'}
+                                    onClick={() => onClickTxHash(el.transaction_hash)}>{el.transaction_hash}</Button>,
+          created_at      : <Text fontSize={'14px'}>{parseToFormattedDate(el.created_at)}</Text>,
+        }
+      })
+    }
   }
 
   const header = [

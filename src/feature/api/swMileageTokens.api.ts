@@ -3,13 +3,15 @@ import {API} from "@/feature";
 import {
   activateSwMileageTokenRequest, burnSwMileageTokenRequest,
   createSwMileageTokenRequest,
-  getSwMileageTokenListRequest, mintSwMileageTokenRequest
+  getSwMileageTokenListRequest, getSwMileageTokenRankingRequest, mintSwMileageTokenRequest
 } from "@/feature/types/swMileageTokens.request";
 import {
   activateSwMileageTokenResponse, burnSwMileageTokenResponse,
   createSwMileageTokenResponse,
-  getSwMileageTokenListResponse, mintSwMileageTokenResponse
+  getSwMileageTokenListResponse, getSwMileageTokenRankingResponse, mintSwMileageTokenResponse
 } from "@/feature/types/swMileageTokens.response";
+import { log } from "console";
+import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
 
 const getSwMileageTokenList: API<getSwMileageTokenListRequest, getSwMileageTokenListResponse> = async() => {
   try{
@@ -56,10 +58,31 @@ const burnSwMileageToken: API<burnSwMileageTokenRequest, burnSwMileageTokenRespo
   }
 }
 
+const getSwMileageTokenRanking: API<getSwMileageTokenRankingRequest, getSwMileageTokenRankingResponse> = async(request) => {
+  const {from, to} = request.params
+  const {swMileageTokenId} = request.body
+  try {
+    const result = await SwMileageTokenServer.get(
+      `/${swMileageTokenId}/ranking`,
+      {
+        params: {
+          from,
+          to,
+        },
+      }
+    );
+    return result.data;
+  } catch (e) {
+    throw e
+  }
+}
+
+
 export {
   getSwMileageTokenList as getSwMileageTokenListAPI,
   activateSwMileageToken as activateSwMileageTokenAPI,
   createSwMileageToken as createSwMileageTokenAPI,
   mintSwMileageToken as mintSwMileageTokenAPI,
   burnSwMileageToken as burnSwMileageTokenAPI,
+  getSwMileageTokenRanking as getSwMileageTokenRankingAPI
 }

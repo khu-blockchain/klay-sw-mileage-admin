@@ -12,6 +12,8 @@ const SwMileageTokenServer = axios.create({baseURL: `${baseURL}sw-mileage-tokens
 const SwMileageTokenHistoryServer = axios.create({baseURL: `${baseURL}sw-mileage-token-histories`})
 
 const setAuthorizationToInstanceHeader = (server: AxiosInstance, token: string) => {
+  console.log(token);
+  
   server.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 

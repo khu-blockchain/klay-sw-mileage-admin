@@ -1,3 +1,5 @@
+import { Nullable, SwMileageToken } from "@/store/types"
+
 type getSwMileageTokenList = {}
 
 type activateSwMileageToken = {
@@ -35,10 +37,21 @@ type burnSwMileageToken = {
   }
 }
 
+type getSwMileageTokenRanking = {
+  params: {
+    from: number;
+    to: number;
+  },
+  body: {
+    swMileageTokenId: number
+  }
+}
+
 export type {
   getSwMileageTokenList as getSwMileageTokenListRequest,
   activateSwMileageToken as activateSwMileageTokenRequest,
   createSwMileageToken as createSwMileageTokenRequest,
   mintSwMileageToken as mintSwMileageTokenRequest,
   burnSwMileageToken as burnSwMileageTokenRequest,
+  getSwMileageTokenRanking as getSwMileageTokenRankingRequest
 }

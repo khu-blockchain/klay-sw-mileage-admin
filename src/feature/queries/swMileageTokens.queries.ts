@@ -3,17 +3,17 @@ import {Mutation, Query} from "@/feature";
 import {
   activateSwMileageTokenRequest, burnSwMileageTokenRequest,
   createSwMileageTokenRequest,
-  getSwMileageTokenListRequest, mintSwMileageTokenRequest
+  getSwMileageTokenListRequest, getSwMileageTokenRankingRequest, mintSwMileageTokenRequest
 } from "@/feature/types/swMileageTokens.request";
 import {
   activateSwMileageTokenResponse, burnSwMileageTokenResponse,
   createSwMileageTokenResponse,
-  getSwMileageTokenListResponse, mintSwMileageTokenResponse
+  getSwMileageTokenListResponse, getSwMileageTokenRankingResponse, mintSwMileageTokenResponse
 } from "@/feature/types/swMileageTokens.response";
 import {
   activateSwMileageTokenAPI, burnSwMileageTokenAPI,
   createSwMileageTokenAPI,
-  getSwMileageTokenListAPI, mintSwMileageTokenAPI
+  getSwMileageTokenListAPI, getSwMileageTokenRankingAPI, mintSwMileageTokenAPI
 } from "@/feature/api/swMileageTokens.api";
 import useAdminStore from "@/store/global/useAdminStore";
 import {caver} from "@/App";
@@ -36,6 +36,16 @@ const useGetActivateSwMileageToken: Query<getSwMileageTokenListRequest, getSwMil
       return result
     },
     enabled: getAdmin().admin_id !== -1
+  })
+}
+
+const useGetSwMileageTokenRanking: Query<getSwMileageTokenRankingRequest, getSwMileageTokenRankingResponse> = (args) => {
+  return useQuery({
+    queryKey: ['get-sw-mileage-token-ranking'],
+    queryFn: async() => {
+      const data = await getSwMileageTokenRankingAPI(args)
+      return data.result
+    }
   })
 }
 
@@ -93,5 +103,6 @@ export {
   useCreateMileageToken,
   useActivateMileageToken,
   useMintMileageToken,
-  useBurnMileageToken
+  useBurnMileageToken,
+  useGetSwMileageTokenRanking
 }

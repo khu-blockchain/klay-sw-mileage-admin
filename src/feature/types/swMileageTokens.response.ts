@@ -6,6 +6,8 @@ type createSwMileageToken = SwMileageToken
 
 type mintSwMileageToken = any;
 type burnSwMileageToken = any;
+type getSwMileageTokenRanking = any;
+
 
 
 // sw_mileage_token_history_id
@@ -25,5 +27,5 @@ export type {
   createSwMileageToken as createSwMileageTokenResponse,
   mintSwMileageToken as mintSwMileageTokenResponse,
   burnSwMileageToken as burnSwMileageTokenResponse,
-
+  getSwMileageTokenRanking as getSwMileageTokenRankingResponse
 }

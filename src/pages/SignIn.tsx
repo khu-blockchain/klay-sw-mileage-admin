@@ -20,6 +20,8 @@ import {TokenType} from "@/store/types";
 import {setLocalStorageData} from "@/utils/webStorage.utils";
 import {useLogin} from "@/feature/queries/auth.queries";
 import {UserRound, LockKeyhole} from 'lucide-react';
+import { caver } from '@/App';
+import { PrivateKey } from 'caver-js/types/packages/caver-wallet/src/keyring/privateKey';
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -50,14 +52,18 @@ const SignIn = () => {
       position  : "top",
     })
   })
+//   const createKeyRing = async(privateKey: string) => {
+//     const privateKeyInstance = caver.wallet.keyring.createFromPrivateKey(privateKey)
+//     console.log(privateKeyInstance);
 
+//     return privateKeyInstance
+// }
+  
   const onSignIn = async () => {
     console.log(id, password);
-    console.log(md5(password));
-    
+    // const keyRing = await createKeyRing("0x09175d572861168a5b3240b1e8fd818bf6e1b2771b17e4b635a376958f2462b1")
     await mutate({
       body: {loginType: 'ADMIN', id, password: password}
-
     })
   }
 

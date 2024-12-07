@@ -16,18 +16,34 @@ import {
   useToast
 } from "@chakra-ui/react";
 import FormWrapper from "@/components/FormWrapper";
+import { useGetSwMileageTokenRanking } from '@/feature/queries/swMileageTokens.queries';
+import useSwMileageTokenStore from '@/store/global/useSwMileageTokenStore';
 
 const Rank = () => {
-  const rankingData = Array.from({ length: 500 }, (_, i) => ({
-    rank: i + 1,
-    name: `학생 ${i + 1}`,
-    points: Math.floor(Math.random() * 1000),
-  }));
-  const itemsPerPage = 50;
-  const totalPages = Math.ceil(rankingData.length / itemsPerPage);
+  const { swMileageToken } = useSwMileageTokenStore((state) => state);
+  const swMileageTokenId = swMileageToken?.sw_mileage_token_id || 0;
 
+  const itemsPerPage = 50;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const from = (currentPage - 1) * itemsPerPage + 1;
+  const to = currentPage * itemsPerPage;
+
+  // API 호출
+  const { data: rankingData = [] } = useGetSwMileageTokenRanking({
+    params: {
+      from,
+      to,
+    },
+    body: {
+      swMileageTokenId,
+    },
+  });
+
+  // 총 페이지 수
+  const totalPages = Math.ceil(rankingData.length / itemsPerPage);
+
+  // 현재 페이지의 항목 계산
   const currentItems = rankingData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -35,7 +51,7 @@ const Rank = () => {
 
   const getPageNumbers = () => {
     const pageNumbers = [];
-    const maxPageButtons = 5; // Number of page buttons to show
+    const maxPageButtons = 5;
 
     let startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
     let endPage = Math.min(totalPages, startPage + maxPageButtons - 1);
@@ -68,14 +84,18 @@ const Rank = () => {
                 <Th>순위</Th>
                 <Th>이름</Th>
                 <Th>포인트</Th>
+                <Th>학번</Th>
+                <Th>학부</Th>
               </Tr>
             </Thead>
             <Tbody>
-            {currentItems.map((item) => (
+            {currentItems.map((item: any) => (
                 <Tr key={item.rank}>
                   <Td>{item.rank}</Td>
                   <Td>{item.name}</Td>
-                  <Td>{item.points}</Td>
+                  <Td>{item.balance}</Td>
+                  <Td>{item.id}</Td>
+                  <Td>{item.department}</Td>
                 </Tr>
               ))}
             </Tbody>

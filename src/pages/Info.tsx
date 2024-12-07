@@ -125,7 +125,7 @@ const Info = () => {
           title: "지갑주소 형식이 올바르지 않습니다.",
           status: 'error',
           isClosable: true,
-          position: "top"
+          position: "top",
         })
       }
     }
@@ -134,7 +134,7 @@ const Info = () => {
       //api연결
       try {
         await deleteAdmin({
-          body: {adminId: admin_id}
+          body: {adminId: admin_id},
         })
       } catch(e) {
         throw e

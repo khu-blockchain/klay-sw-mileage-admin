@@ -62,6 +62,8 @@ const RootRouter = () => {
 
   const hasAccess = async () => {
     const refreshToken = getLocalStorageData('admin-refresh-token')
+    console.log(refreshToken);
+    
     if(!refreshToken) {
       handleInvalidRefreshToken()
       return;
