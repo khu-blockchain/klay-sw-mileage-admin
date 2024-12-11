@@ -5,10 +5,12 @@ import {Flex, Grid, useToast} from '@chakra-ui/react';
 import BasicInput from "@/components/atom/BasicInput";
 import BasicTextarea from "@/components/atom/BasicTextarea";
 import WithLabel from "@/components/WithLabel";
-import {useCreateMileageToken} from "@/feature/queries/swMileageTokens.queries";
+import {useCreateMileageToken, useGetContractCode} from "@/feature/queries/swMileageTokens.queries";
 import BasicButton from "@/components/atom/BasicButton";
 import useAble from "@/hooks/useAble";
 import {useNavigate} from "react-router-dom";
+import { caver, RpcProvider } from '@/App';
+import useAdminStore from '@/store/global/useAdminStore';
 
 const SwMileageTokenCreate = () => {
   const toast = useToast();
@@ -16,6 +18,7 @@ const SwMileageTokenCreate = () => {
   const [name, setName] = useState<string>('')
   const [symbol, setSymbol] = useState<string>('')
   const [description, setDescription] = useState<string>('')
+  const {getAdmin} = useAdminStore((state) => state)
 
   const isAble = useAble([
     name !== '',
@@ -40,8 +43,30 @@ const SwMileageTokenCreate = () => {
       position  : "top",
     })
   })
+  const {data} = useGetContractCode('');
+  //SigRLP = encode([encode([type, nonce, gasPrice, gas, to, value, from]), chainid, 0, 0])
+  //SigHash = keccak256(SigRLP)
+  //Signature = sign(SigHash, <the sender's private key>)
 
   const createToken = async() => {
+    //토큰 생성(deploy)하는 함수 호출하기 이전에 contract에 서명 생성
+    const deployerKeyring = caver.wallet.keyring.generate()
+    console.log(deployerKeyring);
+    
+    caver.wallet.add(deployerKeyring)
+    const [address] = await window.klaytn.enable();
+    const {abi, bytecode} = data
+    let contract = caver.contract.create(abi)
+    const deployTx = await contract.sign({
+      from: deployerKeyring.address,
+      feeDelegation: true,
+      gas: 5000000
+    }, 'constructor', bytecode, 'keyString','valueString')
+    console.log(deployTx);
+    const rlpEncoded = deployTx.getRLPEncoding()
+    console.log(rlpEncoded);
+    
+    //contract deploy API 호출
     await mutate({
       body: {
         swMileageTokenName: name,

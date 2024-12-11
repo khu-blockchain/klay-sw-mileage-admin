@@ -22,6 +22,15 @@ const getSwMileageTokenList: API<getSwMileageTokenListRequest, getSwMileageToken
   }
 }
 
+const getContractCode: API<any, any> = async() => {
+  try{
+    const result = await SwMileageTokenServer.get('/contract-code')
+    return result.data
+  } catch(e) {
+    throw e
+  }
+}
+
 const activateSwMileageToken: API<activateSwMileageTokenRequest, activateSwMileageTokenResponse> = async(request) => {
   try{
     const result = await SwMileageTokenServer.post(`${request.params.swMileageTokenId}/activate`)
@@ -84,5 +93,6 @@ export {
   createSwMileageToken as createSwMileageTokenAPI,
   mintSwMileageToken as mintSwMileageTokenAPI,
   burnSwMileageToken as burnSwMileageTokenAPI,
-  getSwMileageTokenRanking as getSwMileageTokenRankingAPI
+  getSwMileageTokenRanking as getSwMileageTokenRankingAPI,
+  getContractCode as getContractCodeAPI
 }

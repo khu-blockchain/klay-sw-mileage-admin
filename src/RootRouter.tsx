@@ -24,13 +24,13 @@ import Rank from "./pages/Rank";
 import { useGetActivityField } from "./feature/queries/activityField.queries";
 import { useGetActivateSwMileageToken } from "./feature/queries/swMileageTokens.queries";
 import Info from "./pages/Info";
+import { caver } from "./App";
 
 const RootRouter = () => {
   const navigate = useNavigate()
   const {setAdmin} = useAdminStore((state) => state)
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(true)
-  const location = useLocation();
 
   const {mutate} = useRefresh({
     onSuccessFn: (data) => {
@@ -62,7 +62,6 @@ const RootRouter = () => {
 
   const hasAccess = async () => {
     const refreshToken = getLocalStorageData('admin-refresh-token')
-    console.log(refreshToken);
     
     if(!refreshToken) {
       handleInvalidRefreshToken()

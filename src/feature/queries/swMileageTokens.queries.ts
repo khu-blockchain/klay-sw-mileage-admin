@@ -13,6 +13,7 @@ import {
 import {
   activateSwMileageTokenAPI, burnSwMileageTokenAPI,
   createSwMileageTokenAPI,
+  getContractCodeAPI,
   getSwMileageTokenListAPI, getSwMileageTokenRankingAPI, mintSwMileageTokenAPI
 } from "@/feature/api/swMileageTokens.api";
 import useAdminStore from "@/store/global/useAdminStore";
@@ -44,6 +45,16 @@ const useGetSwMileageTokenRanking: Query<getSwMileageTokenRankingRequest, getSwM
     queryKey: ['get-sw-mileage-token-ranking'],
     queryFn: async() => {
       const data = await getSwMileageTokenRankingAPI(args)
+      return data.result
+    }
+  })
+}
+
+const useGetContractCode: Query<any,any> = () => {
+  return useQuery({
+    queryKey:['get-contract-code'],
+    queryFn: async() =>{
+      const data = await getContractCodeAPI('')
       return data.result
     }
   })
@@ -104,5 +115,6 @@ export {
   useActivateMileageToken,
   useMintMileageToken,
   useBurnMileageToken,
-  useGetSwMileageTokenRanking
+  useGetSwMileageTokenRanking,
+  useGetContractCode
 }
