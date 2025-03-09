@@ -3,11 +3,12 @@ import {SwMileageToken} from "@/store/types";
 type getSwMileageTokenList = Array<SwMileageToken>
 type activateSwMileageToken = SwMileageToken
 type createSwMileageToken = SwMileageToken
+type getActivateSwmileageToken = SwMileageToken
 
 type mintSwMileageToken = any;
 type burnSwMileageToken = any;
 type getSwMileageTokenRanking = any;
-
+type addContractAdmin = any ;
 
 
 // sw_mileage_token_history_id
@@ -27,5 +28,7 @@ export type {
   createSwMileageToken as createSwMileageTokenResponse,
   mintSwMileageToken as mintSwMileageTokenResponse,
   burnSwMileageToken as burnSwMileageTokenResponse,
-  getSwMileageTokenRanking as getSwMileageTokenRankingResponse
+  getSwMileageTokenRanking as getSwMileageTokenRankingResponse,
+  getActivateSwmileageToken as getActivateSwmileageTokenResponse,
+  addContractAdmin as addContractAdminResponse
 }

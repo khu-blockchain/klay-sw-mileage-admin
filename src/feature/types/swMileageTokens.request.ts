@@ -2,6 +2,8 @@ import { Nullable, SwMileageToken } from "@/store/types"
 
 type getSwMileageTokenList = {}
 
+type getActivateSwmileageToken = {}
+
 type activateSwMileageToken = {
   params: {
     swMileageTokenId: number
@@ -14,6 +16,7 @@ type createSwMileageToken = {
     description: string
     symbol: string
     imageUrl: string
+    rlpEncodingString: string
   }
 }
 
@@ -23,7 +26,8 @@ type mintSwMileageToken = {
   },
   body: {
     studentId: string;
-    amount: number
+    amount: number,
+    rawTransaction: string;
   }
 }
 
@@ -33,7 +37,8 @@ type burnSwMileageToken = {
   },
   body: {
     studentId: string;
-    amount: number
+    amount: number,
+    rawTransaction: string;
   }
 }
 
@@ -47,11 +52,23 @@ type getSwMileageTokenRanking = {
   }
 }
 
+type addContractAdmin = {
+  params: {
+    swMileageTokenId: number;
+  },
+  body : {
+    rawTransaction: string;
+  }
+
+}
+
 export type {
   getSwMileageTokenList as getSwMileageTokenListRequest,
   activateSwMileageToken as activateSwMileageTokenRequest,
   createSwMileageToken as createSwMileageTokenRequest,
   mintSwMileageToken as mintSwMileageTokenRequest,
   burnSwMileageToken as burnSwMileageTokenRequest,
-  getSwMileageTokenRanking as getSwMileageTokenRankingRequest
+  getSwMileageTokenRanking as getSwMileageTokenRankingRequest,
+  getActivateSwmileageToken as getActivateSwmileageTokenRequest,
+  addContractAdmin as addContractAdminRequest,
 }

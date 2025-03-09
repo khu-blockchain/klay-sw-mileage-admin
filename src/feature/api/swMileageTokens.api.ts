@@ -1,14 +1,24 @@
 import {SwMileageTokenServer} from "@/feature/serverInstance";
 import {API} from "@/feature";
 import {
-  activateSwMileageTokenRequest, burnSwMileageTokenRequest,
+  activateSwMileageTokenRequest,
+  burnSwMileageTokenRequest,
   createSwMileageTokenRequest,
-  getSwMileageTokenListRequest, getSwMileageTokenRankingRequest, mintSwMileageTokenRequest
+  getSwMileageTokenListRequest,
+  getSwMileageTokenRankingRequest,
+  mintSwMileageTokenRequest,
+  getActivateSwmileageTokenRequest,
+  addContractAdminRequest,
 } from "@/feature/types/swMileageTokens.request";
 import {
-  activateSwMileageTokenResponse, burnSwMileageTokenResponse,
+  activateSwMileageTokenResponse,
+  burnSwMileageTokenResponse,
   createSwMileageTokenResponse,
-  getSwMileageTokenListResponse, getSwMileageTokenRankingResponse, mintSwMileageTokenResponse
+  getSwMileageTokenListResponse,
+  getSwMileageTokenRankingResponse,
+  mintSwMileageTokenResponse,
+  getActivateSwmileageTokenResponse,
+  addContractAdminResponse,
 } from "@/feature/types/swMileageTokens.response";
 import { log } from "console";
 import useSwMileageTokenStore from "@/store/global/useSwMileageTokenStore";
@@ -86,6 +96,26 @@ const getSwMileageTokenRanking: API<getSwMileageTokenRankingRequest, getSwMileag
   }
 }
 
+const getActivateSwmileageToken: API<getActivateSwmileageTokenRequest, getActivateSwmileageTokenResponse> = async(request) => {
+  try{
+    const result = await SwMileageTokenServer.get(`activate`)
+    return result.data;
+  }catch (e) {
+    throw e
+  }
+}
+
+const addContractAdmin: API<addContractAdminRequest, addContractAdminResponse> = async(request) => {
+  const { swMileageTokenId } = request.params
+
+  try {
+    const result = await SwMileageTokenServer.post(`${swMileageTokenId}/add-admin`, request.body)
+    return result.data;
+  } catch (e) {
+    throw e
+  }
+
+}
 
 export {
   getSwMileageTokenList as getSwMileageTokenListAPI,
@@ -94,5 +124,7 @@ export {
   mintSwMileageToken as mintSwMileageTokenAPI,
   burnSwMileageToken as burnSwMileageTokenAPI,
   getSwMileageTokenRanking as getSwMileageTokenRankingAPI,
-  getContractCode as getContractCodeAPI
+  getContractCode as getContractCodeAPI,
+  getActivateSwmileageToken as getActivateSwmileageTokenAPI,
+  addContractAdmin as addContractAdminAPI,
 }

@@ -1,20 +1,35 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {Mutation, Query} from "@/feature";
 import {
-  activateSwMileageTokenRequest, burnSwMileageTokenRequest,
+  activateSwMileageTokenRequest,
+  burnSwMileageTokenRequest,
   createSwMileageTokenRequest,
-  getSwMileageTokenListRequest, getSwMileageTokenRankingRequest, mintSwMileageTokenRequest
+  getSwMileageTokenListRequest,
+  getSwMileageTokenRankingRequest,
+  mintSwMileageTokenRequest,
+  getActivateSwmileageTokenRequest,
+  addContractAdminRequest,
 } from "@/feature/types/swMileageTokens.request";
 import {
-  activateSwMileageTokenResponse, burnSwMileageTokenResponse,
+  activateSwMileageTokenResponse,
+  burnSwMileageTokenResponse,
   createSwMileageTokenResponse,
-  getSwMileageTokenListResponse, getSwMileageTokenRankingResponse, mintSwMileageTokenResponse
+  getSwMileageTokenListResponse,
+  getSwMileageTokenRankingResponse,
+  mintSwMileageTokenResponse,
+  getActivateSwmileageTokenResponse,
+  addContractAdminResponse,
 } from "@/feature/types/swMileageTokens.response";
 import {
-  activateSwMileageTokenAPI, burnSwMileageTokenAPI,
+  activateSwMileageTokenAPI,
+  burnSwMileageTokenAPI,
   createSwMileageTokenAPI,
   getContractCodeAPI,
-  getSwMileageTokenListAPI, getSwMileageTokenRankingAPI, mintSwMileageTokenAPI
+  getSwMileageTokenListAPI,
+  getSwMileageTokenRankingAPI,
+  mintSwMileageTokenAPI,
+  getActivateSwmileageTokenAPI,
+  addContractAdminAPI,
 } from "@/feature/api/swMileageTokens.api";
 import useAdminStore from "@/store/global/useAdminStore";
 import {caver} from "@/App";
@@ -80,6 +95,15 @@ const useActivateMileageToken: Mutation<activateSwMileageTokenRequest, activateS
   })
 }
 
+const useGetActivateSwmileageToken: Mutation<getActivateSwmileageTokenRequest, getActivateSwmileageTokenResponse> = (args) => {
+  const {onSuccessFn, onErrorFn} = args
+  return useMutation({
+    mutationFn: async(data) => getActivateSwmileageTokenAPI(data),
+    ...(onSuccessFn && {onSuccess: (res: activateSwMileageTokenResponse) => onSuccessFn(res)}),
+    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
+  })
+}
+
 const useCreateMileageToken: Mutation<createSwMileageTokenRequest, createSwMileageTokenResponse> = (args) => {
   const {onSuccessFn, onErrorFn} = args
   return useMutation({
@@ -107,6 +131,14 @@ const useBurnMileageToken: Mutation<burnSwMileageTokenRequest, burnSwMileageToke
   })
 }
 
+const useAddContractAdmin: Mutation<addContractAdminRequest, addContractAdminResponse> = (args) => {
+  const {onSuccessFn, onErrorFn} = args
+  return useMutation({
+    mutationFn: async(data) => addContractAdminAPI(data),
+    ...(onSuccessFn && {onSuccess: (res: addContractAdminResponse) => onSuccessFn(res)}),
+    ...(onErrorFn && {onError: (res) => onErrorFn(res)})
+  })
+}
 
 export {
   useGetActivateSwMileageToken,
@@ -116,5 +148,7 @@ export {
   useMintMileageToken,
   useBurnMileageToken,
   useGetSwMileageTokenRanking,
-  useGetContractCode
+  useGetContractCode,
+  useGetActivateSwmileageToken,
+  useAddContractAdmin,
 }
